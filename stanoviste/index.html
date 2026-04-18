@@ -140,18 +140,20 @@
         progFill.style.width = ((s.order / total) * 100) + '%';
       }
 
+      // Snapshot visited state BEFORE any marking — used to gate CTAs and notes
+      const visitedBefore = App.getVisited();
+      const alreadyVisited = visitedBefore.has(s.id);
+
       // Mark visited ONLY when arriving via QR (or on the bonus — that's already gated)
       let revisitInfo = null;
       if (viaQR) {
-        const visitedBefore = App.getVisited();
-        const wasAlreadyVisited = visitedBefore.has(s.id);
         App.markVisited(s.id);
         // Strip via=qr from URL so refresh/share doesn't re-toast
         const clean = new URL(location.href);
         clean.searchParams.delete('via');
         history.replaceState(null, '', clean.toString());
 
-        if (wasAlreadyVisited && !s.bonus) {
+        if (alreadyVisited && !s.bonus) {
           revisitInfo = computeRevisit(s, allStations, visitedBefore);
         } else {
           App.showToast(App.t(lang, 'qrRecorded'));
@@ -208,8 +210,8 @@
       const paragraphs = (s.text || []).map((txt, i) => {
         const p = '<p>' + App.escapeHtml(txt) + '</p>';
         let extras = '';
-        // Insert inline scan CTA after first paragraph (only for non-bonus)
-        if (i === 0 && !s.bonus) extras += inlineScanHtml;
+        // Insert inline scan CTA after first paragraph (only for non-bonus, and only if not yet recorded)
+        if (i === 0 && !s.bonus && !alreadyVisited) extras += inlineScanHtml;
         // Inline images with after === i
         inlineImagesArr.forEach((img, localIdx) => {
           if (img.after === i) {
@@ -237,8 +239,8 @@
         '</div>'
       ) : '';
 
-      // Note if not via QR
-      const qrNote = !viaQR && !s.bonus
+      // Note if not via QR (and not yet recorded)
+      const qrNote = !viaQR && !s.bonus && !alreadyVisited
         ? '<div class="qr-note qr-note--muted">' + App.escapeHtml(App.t(lang, 'qrNotCountedHint')) + '</div>'
         : '';
 
