@@ -3,37 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Přesměrování…</title>
+  <meta name="theme-color" content="#1d6d3e">
+  <title>…</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/app.js" defer></script>
 </head>
 <body>
   <main>
-    <p class="loading" id="msg">Přesměrovávám…</p>
+    <p class="loading" id="msg"><span class="spinner"></span> …</p>
   </main>
+
+  <footer class="site-footer" id="footer"></footer>
+
   <script>
-    (async function () {
-      const msg = document.getElementById('msg');
-      const code = new URLSearchParams(location.search).get('c');
-      if (!code) {
-        msg.textContent = 'Chybí kód QR.';
+  window.addEventListener('DOMContentLoaded', async () => {
+    const App = window.PelinyApp;
+    const lang = App.detectLang();
+    document.documentElement.lang = lang;
+    App.renderFooter(document.getElementById('footer'), lang);
+    document.title = App.t(lang, 'redirecting');
+
+    const msg = document.getElementById('msg');
+    msg.innerHTML = '<span class="spinner"></span> ' + App.escapeHtml(App.t(lang, 'redirecting'));
+
+    const code = new URLSearchParams(location.search).get('c');
+    if (!code) {
+      msg.className = 'error';
+      msg.textContent = App.t(lang, 'qrMissing');
+      return;
+    }
+    try {
+      const res = await fetch('../data/redirects.json', { cache: 'no-cache' });
+      const { redirects } = await res.json();
+      const target = redirects[code];
+      if (!target) {
         msg.className = 'error';
+        msg.innerHTML = App.t(lang, 'qrNotInSystem', { code: App.escapeHtml(code) }) +
+          '<br><a href="../?lang=' + lang + '">' + App.escapeHtml(App.t(lang, 'backToOverview')) + '</a>';
         return;
       }
-      try {
-        const res = await fetch('../data/redirects.json', { cache: 'no-cache' });
-        const { redirects } = await res.json();
-        const target = redirects[code];
-        if (!target) {
-          msg.innerHTML = 'QR kód <b>' + code + '</b> není v systému.<br><a href="../">Zpět na seznam</a>';
-          msg.className = 'error';
-          return;
-        }
-        location.replace('../stanoviste/?id=' + encodeURIComponent(target));
-      } catch (e) {
-        msg.textContent = 'Chyba při přesměrování.';
-        msg.className = 'error';
-      }
-    })();
+      const qs = '?id=' + encodeURIComponent(target) + '&lang=' + lang;
+      location.replace('../stanoviste/' + qs);
+    } catch (e) {
+      msg.className = 'error';
+      msg.textContent = App.t(lang, 'redirectError');
+    }
+  });
   </script>
 </body>
 </html>

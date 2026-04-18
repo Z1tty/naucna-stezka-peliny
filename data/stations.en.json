@@ -1,0 +1,195 @@
+{
+  "meta": {
+    "title": "Peliny Nature Trail",
+    "subtitle": "A nature reserve above the Tichá Orlice river",
+    "intro": "Ten stops lead through a rocky reserve near the town of Choceň — from the history of Pel's Mill through the monumental chalk cliffs all the way to Doskočil's Viewpoint above the town.",
+    "heroImage": "assets/images/opukove-pilire.jpg",
+    "stats": [
+      { "label": "Stops", "value": "10" },
+      { "label": "Length", "value": "~1.5 km" },
+      { "label": "Time", "value": "60 min" }
+    ]
+  },
+  "stations": [
+    {
+      "id": "uvod",
+      "order": 1,
+      "title": "Welcome to Peliny",
+      "subtitle": "Introduction to the trail",
+      "icon": "sign",
+      "image": null,
+      "audio": "assets/audio/demo.mp3",
+      "text": [
+        "The Peliny Nature Reserve lies on the right bank of the Tichá Orlice river, just a few minutes' walk from the main square of Choceň. Within its 3.31 hectares you will find a deep rocky gorge, a preserved flora and a slice of local history.",
+        "The reserve was declared in 1948 and is managed by the Town of Choceň. Its protected features include scree forests, chalk rock chimneys and cliff walls above the right bank of the river.",
+        "Ten stops of this trail will guide you from the history of Pel's Mill through the rock pillars up to Doskočil's Viewpoint. At each panel, please pause and listen to the short commentary."
+      ],
+      "childText": "Hi! Welcome to the Peliny Nature Trail. It's a rocky valley near Choceň where lots of interesting plants grow — and where tiny snails, birds and even four hundred kinds of mushrooms live. Together we'll visit ten stops. Put on some good shoes and let's go!",
+      "location": { "lat": 50.0004, "lng": 16.2160 },
+      "durationToNext": "5 min walk",
+      "next": "opukove-pilire"
+    },
+    {
+      "id": "opukove-pilire",
+      "order": 2,
+      "title": "The Chalk Pillars",
+      "subtitle": "The reserve's icon",
+      "icon": "mountain",
+      "image": "assets/images/opukove-pilire.jpg",
+      "audio": "assets/audio/demo.mp3",
+      "text": [
+        "The monumental chalk walls of Peliny — known locally as opuka — rise up to 35 metres high. They were shaped over millions of years by the patient work of the Tichá Orlice river.",
+        "Opuka is a soft, silty chalk that crumbles and sculpts easily. That's why the cliff has its characteristic look of overhangs, gullies and honeycombed hollows.",
+        "The walls have weathered into remarkable shapes; one of them is nicknamed The Camel (see next stop). Many names were carved into the rock over the 19th and 20th centuries — please help preserve the cliff without adding new inscriptions."
+      ],
+      "childText": "Look up in front of you. These cliffs are as tall as a ten-storey building — a full thirty-five metres! Who built them? The river. Over millions of years it patiently cut its path through the soft rock called opuka — and that's how this huge valley was born. What a patient river, isn't it?",
+      "location": { "lat": 50.0008, "lng": 16.2172 },
+      "durationToNext": "3 min walk",
+      "next": "velbloud"
+    },
+    {
+      "id": "velbloud",
+      "order": 3,
+      "title": "The Camel",
+      "subtitle": "The most striking pillar",
+      "icon": "camel",
+      "image": null,
+      "audio": "assets/audio/demo.mp3",
+      "text": [
+        "You are standing in front of the most striking rock formation in Peliny — a massive chalk pillar locals call Velbloud, The Camel. It earned its name from the two humps at its top that, seen from afar, resemble the silhouette of the animal.",
+        "The pillar resists erosion thanks to a harder layer of opuka in its upper part that acts like a natural hat, protecting the softer rock below. The same principle is at play in the sandstone rock towns of northern Bohemia.",
+        "The Camel is one of the most photographed motifs of Peliny. It looks best in the afternoon, when the sun lights it up from the west."
+      ],
+      "childText": "See that big rock? It has two humps on top — just like a real camel. That's why it has this name. And do you know why it didn't crumble like the rock around it? It has a hard hat on top that shields it from the rain. That stone hat will last for a very long time.",
+      "location": { "lat": 50.0010, "lng": 16.2178 },
+      "durationToNext": "4 min walk",
+      "next": "pel-mlyn"
+    },
+    {
+      "id": "pel-mlyn",
+      "order": 4,
+      "title": "Pel's Mill",
+      "subtitle": "The origin of the name Peliny",
+      "icon": "mill",
+      "image": null,
+      "audio": "assets/audio/demo.mp3",
+      "text": [
+        "The reserve's name comes from an old water mill that once stood below the cliffs on the right bank of the Tichá Orlice. The first written record of Pelín's (also Pelíšek's) mill dates back to 1407.",
+        "The mill was powered by water channelled from a weir further upstream. The clearing above the mill began to be called Peliny, and the name gradually spread to the entire rocky area.",
+        "Today only stone foundations remain, overgrown among the trees. Standing here, you can imagine the bustle of a century ago — the creaking of the mill wheel and the smell of freshly ground flour."
+      ],
+      "childText": "Six hundred years ago a water mill stood right here. It belonged to a man named Pelín — and the whole reserve is named after him. The mill wheel creaked, the water splashed, and the miller ground flour. Today only a few stones in the grass remain of the mill.",
+      "location": { "lat": 50.0012, "lng": 16.2185 },
+      "durationToNext": "4 min walk",
+      "next": "ticha-orlice"
+    },
+    {
+      "id": "ticha-orlice",
+      "order": 5,
+      "title": "The Tichá Orlice River",
+      "subtitle": "The river that carved the valley",
+      "icon": "water",
+      "image": "assets/images/peliny-udoli.jpg",
+      "audio": "assets/audio/demo.mp3",
+      "text": [
+        "The Tichá Orlice rises in the Orlické Mountains near the Polish border and, after 107 kilometres, joins the Divoká Orlice. This stretch between Brandýs nad Orlicí and Choceň is among the most beautiful — and calmest — sections of the river.",
+        "Pike and other predatory fish live in its pools. In spring, barbels arrive to spawn and can be watched right from the bank. In summer the river is a popular destination for paddlers.",
+        "Over thousands of years this very river cut through the soft opuka and shaped a valley tens of metres deep. Without its patient work Peliny would look nothing like today."
+      ],
+      "childText": "This river is called the Tichá Orlice — which means the Quiet Eagle. It's called quiet because most of the year it flows very calmly. Big pike live in it, and in spring fish called barbels come here to have their fish babies. In summer you'll see canoes and kayaks on it.",
+      "location": { "lat": 50.0014, "lng": 16.2192 },
+      "durationToNext": "5 min walk",
+      "next": "kridove-more"
+    },
+    {
+      "id": "kridove-more",
+      "order": 6,
+      "title": "Bed of the Cretaceous Sea",
+      "subtitle": "Geology of opuka",
+      "icon": "fossil",
+      "image": null,
+      "audio": "assets/audio/demo.mp3",
+      "text": [
+        "The rocks you are standing on formed 90 million years ago at the bottom of a warm shallow sea. The whole eastern half of Bohemia was submerged, and layers of calcareous mud mixed with fragments of marine organisms slowly settled on the sea floor.",
+        "Out of these sediments the opuka was born — a light, porous chalky silt with its typical greyish hue. It is soft enough to be cut with a saw, yet strong enough to form cliff walls.",
+        "Hidden in the rock, you may spot fossils from that ancient sea: fragments of crinoids, sea urchins, shells and foraminifera. Collecting is prohibited — please leave them in place for other visitors."
+      ],
+      "childText": "You won't believe this — the place where you're standing used to be the sea! But it was a very, very long time ago — ninety million years. Back then, instead of Bohemia there was water everywhere, and dinosaurs walked the land. On the sea floor, little shells and fish bones slowly turned into this grey rock. Look carefully and you might spot a small fossil.",
+      "location": { "lat": 50.0016, "lng": 16.2200 },
+      "durationToNext": "5 min walk",
+      "next": "teplomilna-flora"
+    },
+    {
+      "id": "teplomilna-flora",
+      "order": 7,
+      "title": "Warmth-loving Flora",
+      "subtitle": "Bladdernut, bellflower and corydalis",
+      "icon": "flower",
+      "image": null,
+      "audio": "assets/audio/demo.mp3",
+      "text": [
+        "The sunlit south-facing slopes and rocky terraces of the reserve host plants that you will hardly find elsewhere in eastern Bohemia. On the rocks grows the rock alyssum; in the undergrowth spreads the hollow corydalis.",
+        "Other rare species include the European bladdernut, the peach-leaved bellflower and the Martagon lily — all of them lovers of warm, dry habitats. The bladdernut is famous for its inflated, papery fruits that were once used to make prayer beads.",
+        "These thermophilic species survive here thanks to the south-facing cliffs, which accumulate sunlight. In summer the temperature by the rock wall can be up to five degrees higher than in the surrounding forest."
+      ],
+      "childText": "Look down at your feet. Rare little flowers grow here that you won't see anywhere else in the region. One is called bladdernut and has bubble-shaped fruits that people once strung into beads. And why do the plants love it here so much? Because the cliffs soak up the sun — it's warmer here than in the shady forest.",
+      "location": { "lat": 50.0020, "lng": 16.2207 },
+      "durationToNext": "4 min walk",
+      "next": "svet-hub"
+    },
+    {
+      "id": "svet-hub",
+      "order": 8,
+      "title": "A World of Fungi",
+      "subtitle": "Hidden biodiversity",
+      "icon": "mushroom",
+      "image": null,
+      "audio": "assets/audio/demo.mp3",
+      "text": [
+        "A long-term mycological survey has documented more than 400 species of fungi in Peliny. For such a small area, this is a remarkable number — placing the reserve among the richest fungal sites in the Pardubice Region.",
+        "You can find common edible species — penny bun, orange birch bolete, chanterelle — as well as rare gems of the autumn forest such as the blusher amanita.",
+        "Picking is forbidden inside the reserve. The fungi here play a vital role in breaking down organic matter and feeding the trees through an underground partnership known as mycorrhiza."
+      ],
+      "childText": "Here is something amazing about Peliny — four hundred kinds of mushrooms live here! There are boletes, birch boletes, chanterelles, but also very rare ones you won't meet in an ordinary forest. Mushrooms are friends of the trees — their underground threads bring the trees water and food. But here you don't pick them.",
+      "location": { "lat": 50.0023, "lng": 16.2214 },
+      "durationToNext": "3 min walk",
+      "next": "zrnovka"
+    },
+    {
+      "id": "zrnovka",
+      "order": 9,
+      "title": "Hidden Dwellers",
+      "subtitle": "The rare molluscs of Peliny",
+      "icon": "snail",
+      "image": null,
+      "audio": "assets/audio/demo.mp3",
+      "text": [
+        "Under the cool, damp shadow of the chalk blocks live small but essential inhabitants of the reserve — rare species of land molluscs. The most precious of them is the ribbed pillar snail (Pupilla triplicata), a tiny snail with a distinctly ribbed shell.",
+        "The calcareous opuka provides the perfect environment — the snails build their shells from calcium compounds found directly in the rock. That is why these species live only where limestone or chalk is present.",
+        "After a rainy night the molluscs crawl out onto the surface and the rocks seem to come alive with them. During the day they hide in cracks. Please do not move the stones — underneath are their shelters."
+      ],
+      "childText": "A very rare little snail lives here — it's called the ribbed pillar snail. It's tiny, with neat little ribs on its shell. And it builds its shell from calcium that it finds right here in the rock. When can you see them best? After rain, they crawl out from the cracks and cover the whole cliff.",
+      "location": { "lat": 50.0025, "lng": 16.2220 },
+      "durationToNext": "6 min walk",
+      "next": "doskocilova-vyhlidka"
+    },
+    {
+      "id": "doskocilova-vyhlidka",
+      "order": 10,
+      "title": "Doskočil's Viewpoint",
+      "subtitle": "A panorama at the finish",
+      "icon": "vista",
+      "image": null,
+      "audio": "assets/audio/demo.mp3",
+      "text": [
+        "You have reached the highest point of the trail. Doskočil's Viewpoint above the chalk cliffs offers a panoramic view of the town of Choceň, the meandering Tichá Orlice, and — on a clear day — the Orlické Mountains in the distance.",
+        "In 2025–2026 the viewpoint was refurbished at a cost of roughly 1.1 million CZK — a new staircase was built and the railing replaced. A resting bench is available as well.",
+        "Thank you for walking the trail all the way up. You can return to the centre of Choceň along the blue tourist trail by the river (about 15 minutes) or take the shorter serpentine path just below the viewpoint."
+      ],
+      "childText": "You did it, all the way to the top! Congratulations! From here you can see the whole town of Choceň and far into the countryside. When it's clear, you can even spot the Orlické Mountains on the horizon. This viewpoint is called Doskočilova, and it has just got new steps. Now sit on the bench and enjoy the view for a while.",
+      "location": { "lat": 50.0028, "lng": 16.2228 },
+      "durationToNext": null,
+      "next": null
+    }
+  ]
+}

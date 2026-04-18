@@ -1,42 +1,194 @@
 {
+  "meta": {
+    "title": "Naučná stezka Peliny",
+    "subtitle": "Přírodní rezervace nad Tichou Orlicí",
+    "intro": "Deset zastavení vás provede skalnatou rezervací u Chocně — od historie Pelova mlýna přes monumentální opukové stěny až k Doskočilově vyhlídce nad městem.",
+    "heroImage": "assets/images/opukove-pilire.jpg",
+    "stats": [
+      { "label": "Zastavení", "value": "10" },
+      { "label": "Délka", "value": "~1,5 km" },
+      { "label": "Čas", "value": "60 min" }
+    ]
+  },
   "stations": [
     {
-      "id": "opukove-pilire",
+      "id": "uvod",
       "order": 1,
-      "title": "Opukové pilíře",
-      "image": "assets/images/opukove-pilire.jpg",
-      "audio": "",
+      "title": "Vítejte na Pelinách",
+      "subtitle": "Úvod k naučné stezce",
+      "icon": "sign",
+      "image": null,
+      "audio": "assets/audio/demo.mp3",
       "text": [
-        "Dominantou rezervace jsou monumentální opukové pilíře, které se tyčí až do výšky 35 metrů. Tyto strmé skalní stěny vznikaly miliony let díky trpělivé erozní činnosti řek.",
-        "Opuka je měkká vápnitá hornina, která se snadno rozpadá. Proto má stěna charakteristický profil s převisy, žlaby a voštinami."
+        "Přírodní rezervace Peliny leží na pravém břehu Tiché Orlice několik minut chůze od choceňského náměstí. Na ploše 3,31 hektaru se setkává hluboké skalnaté údolí, zachovalá květena a kus místní historie.",
+        "Rezervace byla vyhlášena v roce 1948 a spravuje ji město Choceň. Chráněnými prvky jsou suťové lesy, opukové skalní komíny a stěny nad pravým břehem řeky.",
+        "Deset zastavení této stezky vás provede od historie Pelova mlýna přes skalní pilíře až k Doskočilově vyhlídce. U každého panelu se zastavte a poslechněte si krátké povídání."
       ],
-      "location": { "lat": 50.0007, "lng": 16.2175 },
-      "next": "lesni-zivot"
+      "childText": "Ahoj! Vítej na naučné stezce Peliny. Je to skalnaté údolí u Chocně, kde roste spousta zajímavých rostlin a žijí tady malí plži, ptáci a dokonce čtyři sta druhů hub. Projdeme dohromady deset zastavení. Připrav si pořádné boty a jdeme na to!",
+      "location": { "lat": 50.0004, "lng": 16.2160 },
+      "durationToNext": "5 min chůze",
+      "next": "opukove-pilire"
     },
     {
-      "id": "lesni-zivot",
+      "id": "opukove-pilire",
       "order": 2,
-      "title": "Údolí Tiché Orlice",
-      "image": "assets/images/peliny-udoli.jpg",
-      "audio": "",
+      "title": "Opukové pilíře",
+      "subtitle": "Dominanta rezervace",
+      "icon": "mountain",
+      "image": "assets/images/opukove-pilire.jpg",
+      "audio": "assets/audio/demo.mp3",
       "text": [
-        "Údolí Tiché Orlice tvoří ostrý předěl mezi rezervací a okolní krajinou. Řeka po miliony let postupně prořízla měkkou opukou a odkryla skalní podloží.",
-        "Smíšený les na svazích je domovem datla černého, strakapouda i sovy pálené. Listnaté stromy poskytují v korunách dutiny pro hnízdění."
+        "Dominantou Pelin jsou monumentální opukové stěny, které se tyčí až do výšky 35 metrů. Vznikaly miliony let pomalou a trpělivou erozní činností Tiché Orlice.",
+        "Opuka je křehký křídový pemzavec (písčitý slínec) — snadno se drolí a modeluje. Proto má skalní stěna charakteristický vzhled s převisy, žlaby a voštinami.",
+        "Skály jsou zvětralé do rozličných tvarů; jeden z nich dostal přezdívku Velbloud (viz další zastavení). Do opuky se v průběhu 19. a 20. století vtesala řada jmen — prosíme, zachovejte skálu pro další generace bez nových rytin."
       ],
-      "location": { "lat": 50.0010, "lng": 16.2180 },
-      "next": "reka-tiha"
+      "childText": "Podívej se před sebe. Ty skály jsou vysoké jako desetipatrový dům — celých třicet pět metrů! Postavila je řeka. Miliony let jí nevadilo, že je malá. Pomalu si prořezávala cestu měkkou kamenou zvanou opuka, až vyrobila tohle obrovské údolí. To je trpělivost, co říkáš?",
+      "location": { "lat": 50.0008, "lng": 16.2172 },
+      "durationToNext": "3 min chůze",
+      "next": "velbloud"
     },
     {
-      "id": "reka-tiha",
+      "id": "velbloud",
       "order": 3,
-      "title": "Řeka Tichá Orlice",
-      "image": "assets/images/reka.jpg",
-      "audio": "",
+      "title": "Velbloud",
+      "subtitle": "Nejvýraznější skalní pilíř",
+      "icon": "camel",
+      "image": null,
+      "audio": "assets/audio/demo.mp3",
       "text": [
-        "Řeka Tichá Orlice vytvarovala zdejší údolí. Její erozní činnost za tisíce let odkryla opukové podloží.",
-        "V tůních žije pstruh potoční, vranka obecná a mnoho druhů vodního hmyzu."
+        "Před vámi stojí nejvýraznější skalní útvar Pelin — mohutný opukový pilíř zvaný Velbloud. Své jméno dostal podle dvou hrbů v horní části, které z dálky připomínají siluetu zvířete.",
+        "Pilíř odolává erozi díky tvrdší vrstvě opuky v horní části, která funguje jako přírodní „klobouk“ chránící měkčí horninu pod sebou. Stejný princip známe z pískovcových skalních měst v severních Čechách.",
+        "Velbloud patří mezi oblíbené fotografické motivy. Nejlepší světlo je na něm v odpoledních hodinách, kdy ho nasvítí slunce od západu."
       ],
-      "location": { "lat": 50.0015, "lng": 16.2185 },
+      "childText": "Vidíš tu skálu? Má na vrcholku dva hrby jako opravdický velbloud. Proto se jí tak říká. A víš, proč se nerozpadla jako zbytek skály vedle? Nahoře má tvrdý klobouk, který ji chrání před deštěm. Klobouk té skály vydrží ještě strašně dlouho.",
+      "location": { "lat": 50.0010, "lng": 16.2178 },
+      "durationToNext": "4 min chůze",
+      "next": "pel-mlyn"
+    },
+    {
+      "id": "pel-mlyn",
+      "order": 4,
+      "title": "Pelův mlýn",
+      "subtitle": "Původ jména Peliny",
+      "icon": "mill",
+      "image": null,
+      "audio": "assets/audio/demo.mp3",
+      "text": [
+        "Název rezervace pochází od starého vodního mlýna, který stával pod skalami na pravém břehu Tiché Orlice. První písemná zmínka o Pelínově (Pelíškově) mlýně pochází z roku 1407.",
+        "Mlýn poháněla voda svedená náhonem od jezu výše proti proudu. Místnímu prostranství nad mlýnem se začalo říkat „Peliny“ a název se postupně vžil pro celou skalnatou oblast.",
+        "Dnes z mlýna zůstaly jen základy zarostlé mezi stromy. Na jeho místě si lze představit ruch, který zde panoval ještě před sto lety — vrzání mlýnského kola a pach čerstvě mleté mouky."
+      ],
+      "childText": "Před šesti sty lety tady stál vodní mlýn. Patřil pánovi, který se jmenoval Pelín, a právě po něm je celá rezervace pojmenovaná. Mlýnské kolo vrzalo, voda šplouchala a mlynář mlel mouku. Dneska najdeš ze mlýna už jen kamenné základy v trávě.",
+      "location": { "lat": 50.0012, "lng": 16.2185 },
+      "durationToNext": "4 min chůze",
+      "next": "ticha-orlice"
+    },
+    {
+      "id": "ticha-orlice",
+      "order": 5,
+      "title": "Tichá Orlice",
+      "subtitle": "Řeka, která vytvarovala údolí",
+      "icon": "water",
+      "image": "assets/images/peliny-udoli.jpg",
+      "audio": "assets/audio/demo.mp3",
+      "text": [
+        "Tichá Orlice pramení v Orlických horách nedaleko polských hranic a po 107 kilometrech se spojuje s Divokou Orlicí. Zdejší úsek mezi Brandýsem nad Orlicí a Chocní patří k nejkrásnějším a zároveň nejklidnějším částem toku.",
+        "V tůních žije štika obecná a další dravé ryby. Na jaře sem za třením připlouvají parmy, které lze pozorovat přímo ze břehu. V létě je řeka vyhledávaným cílem vodáků.",
+        "Právě řeka po tisíce let prořezávala měkkou opukou údolí hluboké desítky metrů — bez její trpělivé práce by Peliny nevypadaly jako dnes."
+      ],
+      "childText": "Tahle řeka se jmenuje Tichá Orlice. Ticháhje proto, že většinu roku teče klidně. Žijí v ní velké štiky a na jaře sem připlouvají ryby jménem parma, aby tady měly malá rybí mimina. V létě po ní plují kanoe a kajaky.",
+      "location": { "lat": 50.0014, "lng": 16.2192 },
+      "durationToNext": "5 min chůze",
+      "next": "kridove-more"
+    },
+    {
+      "id": "kridove-more",
+      "order": 6,
+      "title": "Dno křídového moře",
+      "subtitle": "Geologie opuky",
+      "icon": "fossil",
+      "image": null,
+      "audio": "assets/audio/demo.mp3",
+      "text": [
+        "Horniny, ve kterých dnes stojíte, vznikly před 90 miliony let na dně mělkého teplého moře. Celá východní polovina Čech byla tehdy pod vodou a na mořském dně se ukládaly vrstvy vápnitých kalů s úlomky mořských organismů.",
+        "Z těchto usazenin postupně zkameněla opuka — lehký, pórovitý slínec s typickým našedlým odstínem. Je natolik měkká, že se dala krájet pilou; zároveň je dostatečně pevná, aby vytvořila skalní stěny.",
+        "Ve skále se občas objeví drobné zkameněliny: úlomky mořských lilijic, ježovek, škeblí a dírkovců. V rezervaci platí zákaz jejich sběru — nechte je ve skále i dalším návštěvníkům."
+      ],
+      "childText": "Neuvěříš tomu — tady kde teď stojíš, bylo kdysi moře! Jenže to bylo strašně dávno, před devadesáti miliony let. Tehdy místo Čech šplouchala voda a pluli tu dinosauři. Na mořském dně se z mušlí a koster rybek pomalu vytvářela tahle šedá skála. Když se pořádně podíváš, možná uvidíš malou zkamenělinu.",
+      "location": { "lat": 50.0016, "lng": 16.2200 },
+      "durationToNext": "5 min chůze",
+      "next": "teplomilna-flora"
+    },
+    {
+      "id": "teplomilna-flora",
+      "order": 7,
+      "title": "Teplomilná flóra",
+      "subtitle": "Klokoč, zvonek a dymnivka",
+      "icon": "flower",
+      "image": null,
+      "audio": "assets/audio/demo.mp3",
+      "text": [
+        "Slunné jižní svahy a skalní terasy rezervace hostí rostliny, které jinde ve východních Čechách téměř nenajdete. Na skalách roste tařice skalní, v podrostu se rozprostírá dymnivka dutá.",
+        "K dalším vzácným druhům patří klokoč zpeřený, zvonek broskvolistý a lilie zlatohlávek — všechny preferují teplá a suchá stanoviště. Klokoč je známý nápadnými nafouklými plody, ze kterých se v minulosti dělaly modlitební růžence.",
+        "Teplomilné druhy zde přežívají díky jižní orientaci skal, které akumulují sluneční teplo. Teplota u jižní stěny bývá v létě až o pět stupňů vyšší než v okolním lese."
+      ],
+      "childText": "Podívej se pod nohy. Rostou tady vzácné kytičky, které jinde v kraji vůbec neuvidíš. Jedna z nich se jmenuje klokoč a má bublinovité plody, ze kterých lidi dřív dělali korále. A proč tu ty rostliny tak rády rostou? Protože skály akumulují slunce a je jim tu tepleji než v lese.",
+      "location": { "lat": 50.0020, "lng": 16.2207 },
+      "durationToNext": "4 min chůze",
+      "next": "svet-hub"
+    },
+    {
+      "id": "svet-hub",
+      "order": 8,
+      "title": "Svět hub",
+      "subtitle": "Skrytá biodiverzita",
+      "icon": "mushroom",
+      "image": null,
+      "audio": "assets/audio/demo.mp3",
+      "text": [
+        "V Pelinách bylo během dlouhodobého mykologického průzkumu zdokumentováno přes 400 druhů hub. Na tak malou plochu jde o mimořádné číslo, které rezervaci řadí mezi nejbohatší lokality Pardubického kraje.",
+        "Najdete zde běžné jedlé druhy — hřib smrkový, křemenáč březový, lišku obecnou — ale i vzácné ozdoby podzimního lesa jako muchomůrku růžovku.",
+        "V rezervaci platí zákaz sběru. Houby zde plní důležitou roli v rozkládání organické hmoty a zajišťují výživu stromům prostřednictvím symbiózy (mykorhizy)."
+      ],
+      "childText": "Víš, co je na Pelinách neuvěřitelné? Žije tady čtyři sta druhů hub! Jsou tady hřiby, křemenáče, lišky, ale i hodně vzácné, které normálně v lese nepotkáš. Houby jsou kamarádi stromů — jejich podzemní vlákna přinášejí stromům vodu a jídlo. Tady se ale houby nesbírají.",
+      "location": { "lat": 50.0023, "lng": 16.2214 },
+      "durationToNext": "3 min chůze",
+      "next": "zrnovka"
+    },
+    {
+      "id": "zrnovka",
+      "order": 9,
+      "title": "Skrytí obyvatelé",
+      "subtitle": "Vzácní měkkýši",
+      "icon": "snail",
+      "image": null,
+      "audio": "assets/audio/demo.mp3",
+      "text": [
+        "Ve vlhkém stínu pod opukovými bloky žijí malí, ale pro rezervaci zcela zásadní obyvatelé — vzácné druhy měkkýšů. Nejcennějším z nich je zrnovka žebernatá, drobný plž s výrazně žebrovanou ulitou.",
+        "Vápnitá opuka jim poskytuje ideální prostředí — ulity stavějí právě z vápenatých sloučenin. Proto se tyto druhy vyskytují výhradně v oblastech s vápnitými horninami.",
+        "Když v noci naprší, vylézají měkkýši na povrch a skály se jimi doslova pokryjí. Přes den se většinou ukrývají v puklinách. Prosíme, nepřenášejte kameny — pod nimi jsou jejich úkryty."
+      ],
+      "childText": "Žije tady jeden vzácný plž — říká se mu zrnovka žebernatá. Je to malilinký šnek, který má na ulitě jemné žebírka. Svoji ulitu si dělá z vápníku, který najde přímo ve zdejší skále. A víš, kdy je uvidíš nejlíp? Po dešti vylezou z puklin a skála se jimi úplně pokryje.",
+      "location": { "lat": 50.0025, "lng": 16.2220 },
+      "durationToNext": "6 min chůze",
+      "next": "doskocilova-vyhlidka"
+    },
+    {
+      "id": "doskocilova-vyhlidka",
+      "order": 10,
+      "title": "Doskočilova vyhlídka",
+      "subtitle": "Panorama na závěr",
+      "icon": "vista",
+      "image": null,
+      "audio": "assets/audio/demo.mp3",
+      "text": [
+        "Dorazili jste na nejvyšší bod stezky. Doskočilova vyhlídka nad opukovými skálami nabízí panoramatický výhled na město Choceň, meandrující Tichou Orlici a za dobré viditelnosti až na Orlické hory.",
+        "Vyhlídka prošla v letech 2025–2026 rekonstrukcí za zhruba 1,1 milionu korun — přibyly nové schody a bylo vyměněno zábradlí. K dispozici je také odpočinková lavička.",
+        "Děkujeme, že jste prošli stezku až sem. Zpět do centra Chocně se dostanete modrou turistickou značkou podél řeky (cca 15 minut), nebo kratší serpentinovou pěšinou pod vyhlídkou."
+      ],
+      "childText": "Zvládl jsi to až sem! Gratuluji! Odtud vidíš celé město Choceň a daleko do kraje. Za jasného počasí jsou vidět i Orlické hory na obzoru. Tahle vyhlídka se jmenuje Doskočilova a nedávno dostala nové schody. Teď si v klidu sedni na lavičku a chvíli si užívej výhled.",
+      "location": { "lat": 50.0028, "lng": 16.2228 },
+      "durationToNext": null,
       "next": null
     }
   ]
