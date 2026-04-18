@@ -586,6 +586,205 @@ main {
   margin-bottom: 0;
 }
 
+/* ------------------------------------------------------------------ GALLERY (top carousel) */
+
+.station__gallery {
+  margin: 4px -18px 24px;
+  position: relative;
+  background: var(--bg-deep);
+}
+
+.station__gallery-scroll {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  aspect-ratio: 3 / 2;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.station__gallery-scroll::-webkit-scrollbar { display: none; }
+
+.station__gallery-item {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  position: relative;
+  min-width: 0;
+}
+
+.station__gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  cursor: zoom-in;
+}
+
+.station__gallery-caption {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 34px;
+  color: rgba(255, 255, 255, 0.96);
+  font-size: 0.85rem;
+  line-height: 1.35;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.85);
+  padding: 0;
+  max-height: 3em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  pointer-events: none;
+}
+
+.station__gallery-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  pointer-events: none;
+}
+
+.station__gallery-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  border: none;
+  padding: 0;
+  transition: background 0.2s ease, transform 0.2s ease;
+  pointer-events: auto;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.station__gallery-dot.is-active {
+  background: #fff;
+  transform: scale(1.25);
+}
+
+/* ------------------------------------------------------------------ INLINE FIG */
+
+.station__inline-fig {
+  margin: 20px -18px 24px;
+  padding: 0;
+}
+
+.station__inline-fig img {
+  width: 100%;
+  max-height: 58vh;
+  object-fit: cover;
+  display: block;
+  cursor: zoom-in;
+}
+
+.station__inline-fig figcaption {
+  padding: 8px 18px 0;
+  font-size: 0.88rem;
+  color: var(--muted);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* ------------------------------------------------------------------ LIGHTBOX */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
+  animation: fadeIn 0.2s ease;
+}
+
+.lightbox__img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.lightbox__close {
+  position: absolute;
+  top: max(14px, env(safe-area-inset-top));
+  right: 14px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.3rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lightbox__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.5rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.lightbox__prev { left: 14px; }
+.lightbox__next { right: 14px; }
+
+.lightbox__caption {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: max(58px, calc(env(safe-area-inset-bottom) + 58px));
+  color: #fff;
+  text-align: center;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+}
+
+.lightbox__counter {
+  position: absolute;
+  bottom: max(20px, env(safe-area-inset-bottom));
+  left: 0; right: 0;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 480px) {
+  .lightbox__nav { width: 40px; height: 40px; font-size: 1.3rem; }
+  .lightbox__prev { left: 8px; }
+  .lightbox__next { right: 8px; }
+}
+
 /* ------------------------------------------------------------------ AUDIO PLAYER */
 
 .audio {

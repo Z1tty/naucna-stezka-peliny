@@ -158,10 +158,40 @@
         }
       }
 
-      // Media
-      const media = s.image
-        ? '<figure class="station__media"><img src="../' + App.escapeHtml(s.image) + '" alt="' + App.escapeHtml(s.title) + '"></figure>'
-        : '<figure class="station__media station__media--icon"><svg aria-hidden="true"><use href="#icon-' + App.escapeHtml(s.icon || 'sign') + '"/></svg></figure>';
+      // Images: normalize — prefer `images` array, fall back to legacy `image` string
+      const galleryImages = (s.images && s.images.length)
+        ? s.images
+        : (s.image ? [{ src: s.image }] : []);
+      const inlineImagesArr = s.inlineImages || [];
+      // Combined list for lightbox (gallery first, then inline in order)
+      const allImages = galleryImages.concat(inlineImagesArr).map(it => ({
+        src: '../' + it.src,
+        caption: it.caption || ''
+      }));
+
+      // Render top media: icon fallback / single figure / swipeable gallery
+      let media;
+      if (galleryImages.length === 0) {
+        media = '<figure class="station__media station__media--icon"><svg aria-hidden="true"><use href="#icon-' + App.escapeHtml(s.icon || 'sign') + '"/></svg></figure>';
+      } else {
+        const items = galleryImages.map((img, i) =>
+          '<div class="station__gallery-item">' +
+            '<img src="../' + App.escapeHtml(img.src) + '" alt="' + App.escapeHtml(img.caption || s.title) + '" data-lb-index="' + i + '" loading="lazy">' +
+            (img.caption ? '<div class="station__gallery-caption">' + App.escapeHtml(img.caption) + '</div>' : '') +
+          '</div>'
+        ).join('');
+        const dots = galleryImages.length > 1
+          ? '<div class="station__gallery-dots" id="galleryDots">' +
+              galleryImages.map((_, i) =>
+                '<button class="station__gallery-dot' + (i === 0 ? ' is-active' : '') + '" type="button" data-dot="' + i + '" aria-label="Fotka ' + (i + 1) + '"></button>'
+              ).join('') +
+            '</div>'
+          : '';
+        media = '<figure class="station__gallery">' +
+                  '<div class="station__gallery-scroll" id="galleryScroll">' + items + '</div>' +
+                  dots +
+                '</figure>';
+      }
 
       const inlineScanHtml =
         '<div class="inline-scan">' +
@@ -177,9 +207,20 @@
 
       const paragraphs = (s.text || []).map((txt, i) => {
         const p = '<p>' + App.escapeHtml(txt) + '</p>';
+        let extras = '';
         // Insert inline scan CTA after first paragraph (only for non-bonus)
-        if (i === 0 && !s.bonus) return p + inlineScanHtml;
-        return p;
+        if (i === 0 && !s.bonus) extras += inlineScanHtml;
+        // Inline images with after === i
+        inlineImagesArr.forEach((img, localIdx) => {
+          if (img.after === i) {
+            const lbIdx = galleryImages.length + localIdx;
+            extras += '<figure class="station__inline-fig">' +
+              '<img src="../' + App.escapeHtml(img.src) + '" alt="' + App.escapeHtml(img.caption || '') + '" data-lb-index="' + lbIdx + '" loading="lazy">' +
+              (img.caption ? '<figcaption>' + App.escapeHtml(img.caption) + '</figcaption>' : '') +
+            '</figure>';
+          }
+        });
+        return p + extras;
       }).join('');
 
       const audioBlock = s.audio ? (
@@ -286,6 +327,30 @@
 
       const inlineBtn = document.getElementById('inlineScanBtn');
       if (inlineBtn) inlineBtn.addEventListener('click', () => App.openScanner(lang));
+
+      // Lightbox: click any [data-lb-index] image
+      document.querySelectorAll('[data-lb-index]').forEach(el => {
+        el.addEventListener('click', () => {
+          const i = parseInt(el.getAttribute('data-lb-index'), 10) || 0;
+          App.openLightbox(allImages, i);
+        });
+      });
+
+      // Gallery dots <-> scroll sync
+      const scroll = document.getElementById('galleryScroll');
+      const dotsEl = document.getElementById('galleryDots');
+      if (scroll && dotsEl && galleryImages.length > 1) {
+        const dots = [...dotsEl.querySelectorAll('.station__gallery-dot')];
+        scroll.addEventListener('scroll', () => {
+          const i = Math.round(scroll.scrollLeft / scroll.clientWidth);
+          dots.forEach((d, j) => d.classList.toggle('is-active', j === i));
+        }, { passive: true });
+        dots.forEach((d, i) => {
+          d.addEventListener('click', () => {
+            scroll.scrollTo({ left: scroll.clientWidth * i, behavior: 'smooth' });
+          });
+        });
+      }
 
     } catch (e) {
       root.innerHTML = '<p class="error">' + App.escapeHtml(App.t(lang, 'loadErrorStation')) + '</p>';

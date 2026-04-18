@@ -456,6 +456,72 @@
     }
   }
 
+  /* ------------------------- LIGHTBOX ------------------------- */
+
+  function openLightbox(images, startIndex) {
+    if (!images || !images.length) return;
+    let idx = Math.max(0, Math.min(startIndex || 0, images.length - 1));
+    const multi = images.length > 1;
+
+    const overlay = document.createElement('div');
+    overlay.className = 'lightbox';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.innerHTML =
+      '<button type="button" class="lightbox__close" aria-label="Close">\u2715</button>' +
+      (multi ? '<button type="button" class="lightbox__nav lightbox__prev" aria-label="Previous">\u2039</button>' : '') +
+      '<img class="lightbox__img" src="" alt="">' +
+      (multi ? '<button type="button" class="lightbox__nav lightbox__next" aria-label="Next">\u203A</button>' : '') +
+      '<div class="lightbox__caption" id="lbCaption"></div>' +
+      (multi ? '<div class="lightbox__counter" id="lbCounter"></div>' : '');
+    document.body.appendChild(overlay);
+    document.body.style.overflow = 'hidden';
+
+    const img = overlay.querySelector('.lightbox__img');
+    const cap = overlay.querySelector('#lbCaption');
+    const counter = overlay.querySelector('#lbCounter');
+
+    function update() {
+      const it = images[idx];
+      img.src = it.src || it;
+      const captionText = it.caption || '';
+      cap.textContent = captionText;
+      cap.style.display = captionText ? 'block' : 'none';
+      if (counter) counter.textContent = (idx + 1) + ' / ' + images.length;
+    }
+    function prev() { idx = (idx - 1 + images.length) % images.length; update(); }
+    function next() { idx = (idx + 1) % images.length; update(); }
+    function close() {
+      overlay.remove();
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', keyHandler);
+    }
+    function keyHandler(e) {
+      if (e.key === 'Escape') close();
+      else if (multi && e.key === 'ArrowLeft')  prev();
+      else if (multi && e.key === 'ArrowRight') next();
+    }
+
+    document.addEventListener('keydown', keyHandler);
+    overlay.querySelector('.lightbox__close').addEventListener('click', close);
+    overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+    const prevBtn = overlay.querySelector('.lightbox__prev');
+    const nextBtn = overlay.querySelector('.lightbox__next');
+    if (prevBtn) prevBtn.addEventListener('click', prev);
+    if (nextBtn) nextBtn.addEventListener('click', next);
+
+    // Swipe support on the image
+    let touchStartX = 0;
+    img.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    img.addEventListener('touchend', e => {
+      if (!multi) return;
+      const dx = (e.changedTouches[0].clientX || 0) - touchStartX;
+      if (Math.abs(dx) > 40) { if (dx < 0) next(); else prev(); }
+    });
+
+    update();
+  }
+
   global.PelinyApp = {
     detectLang, setLang, t, I18N,
     dataFileUrl, getVisited, markVisited, clearVisited,
@@ -463,6 +529,7 @@
     splitStations, isMainCompleted,
     buildMapyRouteUrl, buildMapyPointUrl,
     escapeHtml, renderLangSwitch, renderFooter, showToast,
-    openScanner, tryResolveScan
+    openScanner, tryResolveScan,
+    openLightbox
   };
 })(window);

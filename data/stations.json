@@ -21,7 +21,14 @@
       "title": "Opukové pilíře",
       "subtitle": "Dominanta rezervace",
       "icon": "mountain",
-      "image": "assets/images/opukove-pilire.jpg",
+      "images": [
+        { "src": "assets/images/opukove-pilire.jpg", "caption": "Hlavní stěna s mikroreliéfem" },
+        { "src": "assets/images/peliny-udoli.jpg", "caption": "Pohled do údolí Tiché Orlice" },
+        { "src": "assets/images/hero-peliny.jpg", "caption": "Pohled na Peliny z protějšího svahu" }
+      ],
+      "inlineImages": [
+        { "src": "assets/images/peliny-udoli.jpg", "after": 1, "caption": "Řeka pomalu prořezala údolí desítky metrů hluboké." }
+      ],
       "audio": "assets/audio/demo.mp3",
       "text": [
         "Dominantou Pelin jsou monumentální opukové stěny, které se tyčí až do výšky 35 metrů. Vznikaly miliony let pomalou a trpělivou erozní činností Tiché Orlice.",

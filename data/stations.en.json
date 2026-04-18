@@ -30,7 +30,14 @@
       "title": "The Chalk Pillars",
       "subtitle": "The reserve's icon",
       "icon": "mountain",
-      "image": "assets/images/opukove-pilire.jpg",
+      "images": [
+        { "src": "assets/images/opukove-pilire.jpg", "caption": "Main cliff face with its honeycombed surface" },
+        { "src": "assets/images/peliny-udoli.jpg", "caption": "View into the Tichá Orlice valley" },
+        { "src": "assets/images/hero-peliny.jpg", "caption": "Peliny seen from the opposite slope" }
+      ],
+      "inlineImages": [
+        { "src": "assets/images/peliny-udoli.jpg", "after": 1, "caption": "Over millennia the river carved a valley tens of metres deep." }
+      ],
       "audio": "assets/audio/demo.mp3",
       "text": [
         "The monumental chalk walls of Peliny — known locally as opuka — rise up to 35 metres high. They were shaped over millions of years by the patient work of the Tichá Orlice river.",
