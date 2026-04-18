@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1d6d3e">
+  <title>QR kódy — Naučná stezka Peliny</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --fg: #0a0a0a;
+      --muted: #6b7280;
+      --hairline: #ebe9e3;
+      --accent: #1d6d3e;
+      --bg: #fbfaf7;
+      --font-sans: "Inter", system-ui, sans-serif;
+      --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+    }
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      color: var(--fg);
+      background: var(--bg);
+      padding: 32px 20px 80px;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    header {
+      max-width: 900px;
+      margin: 0 auto 24px;
+    }
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 6vw, 2.8rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin: 0 0 8px;
+    }
+    .intro {
+      color: var(--muted);
+      margin: 0 0 16px;
+      max-width: 62ch;
+    }
+    .back-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+    .grid {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid var(--hairline);
+      border-radius: 14px;
+      padding: 18px 16px 14px;
+      text-align: center;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    }
+    .card img {
+      width: 100%;
+      max-width: 180px;
+      height: auto;
+      display: block;
+      margin: 0 auto 12px;
+    }
+    .card__num {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-bottom: 6px;
+    }
+    .card__title {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 400;
+      margin: 0 0 4px;
+      letter-spacing: -0.01em;
+    }
+    .card__url {
+      font-size: 0.72rem;
+      color: var(--muted);
+      word-break: break-all;
+      font-family: ui-monospace, menlo, monospace;
+      margin: 0 0 8px;
+    }
+    .card__link {
+      font-size: 0.82rem;
+      color: var(--accent);
+      text-decoration: none;
+      display: inline-block;
+      padding: 4px 0;
+    }
+    .card__link:hover {
+      text-decoration: underline;
+    }
+    .toolbar {
+      max-width: 900px;
+      margin: 0 auto 20px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 16px;
+      background: #fff;
+      color: var(--fg);
+      border: 1px solid var(--hairline);
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn:hover { border-color: var(--muted); }
+
+    @media print {
+      body { background: #fff; padding: 8mm; }
+      header, .toolbar, .back-link { display: none; }
+      .grid { gap: 8px; grid-template-columns: repeat(3, 1fr); }
+      .card { border: 1px solid #ccc; padding: 10px; box-shadow: none; break-inside: avoid; }
+      @page { margin: 10mm; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="back-link" href="../">&larr; Zpět na stezku</a>
+    <h1>Testovací QR kódy</h1>
+    <p class="intro">
+      Deset QR kódů odpovídajících zastavením v systému. Kódy vedou přes redirect <code>/qr/?c=N</code>, takže obsah lze přemapovat v <code>data/redirects.json</code> bez přetisku.
+    </p>
+  </header>
+
+  <div class="toolbar">
+    <button class="btn" onclick="window.print()">Vytisknout / uložit PDF</button>
+    <a class="btn" href="./png/" download>Stáhnout PNG soubory</a>
+  </div>
+
+  <main class="grid" id="grid"></main>
+
+  <script>
+    const titles = {
+      1:  { id: 'uvod',                  cs: 'Vítejte na Pelinách' },
+      2:  { id: 'opukove-pilire',        cs: 'Opukové pilíře' },
+      3:  { id: 'velbloud',              cs: 'Velbloud' },
+      4:  { id: 'pel-mlyn',              cs: 'Pelův mlýn' },
+      5:  { id: 'ticha-orlice',          cs: 'Tichá Orlice' },
+      6:  { id: 'kridove-more',          cs: 'Dno křídového moře' },
+      7:  { id: 'teplomilna-flora',      cs: 'Teplomilná flóra' },
+      8:  { id: 'svet-hub',              cs: 'Svět hub' },
+      9:  { id: 'zrnovka',               cs: 'Skrytí obyvatelé' },
+      10: { id: 'doskocilova-vyhlidka',  cs: 'Doskočilova vyhlídka' }
+    };
+
+    const base = 'https://z1tty.github.io/naucna-stezka-peliny/qr/?c=';
+    const grid = document.getElementById('grid');
+    for (let i = 1; i <= 10; i++) {
+      const url = base + i;
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <span class="card__num">Zastavení ${i}</span>
+        <img src="png/peliny-${i}.png" alt="QR kód č. ${i}">
+        <h3 class="card__title">${titles[i].cs}</h3>
+        <p class="card__url">${url}</p>
+        <a class="card__link" href="${url}" target="_blank">Otevřít odkaz &rarr;</a>
+      `;
+      grid.appendChild(card);
+    }
+  </script>
+</body>
+</html>
