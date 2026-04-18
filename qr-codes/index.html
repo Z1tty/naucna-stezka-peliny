@@ -139,11 +139,72 @@
     }
     .btn:hover { border-color: var(--muted); }
 
+    .install-block {
+      max-width: 900px;
+      margin: 0 auto 28px;
+      padding: 20px 22px 18px;
+      background: #fff;
+      border: 1px solid var(--hairline);
+      border-left: 3px solid var(--accent);
+      border-radius: 14px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+      break-inside: avoid;
+    }
+    .install-block__title {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 400;
+      margin: 0 0 6px;
+      letter-spacing: -0.015em;
+    }
+    .install-block__lead {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+    .install-block__cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .install-block__col h3 {
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin: 0 0 6px;
+      color: var(--accent);
+      letter-spacing: 0.01em;
+    }
+    .install-block__col ol {
+      margin: 0;
+      padding-left: 20px;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: #2a2a2a;
+    }
+    .install-block__col ol li { padding: 2px 0; }
+    .install-block__col b { font-weight: 600; color: #0a0a0a; }
+
+    .section-title {
+      max-width: 900px;
+      margin: 0 auto 10px;
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    @media (max-width: 560px) {
+      .install-block__cols { grid-template-columns: 1fr; gap: 14px; }
+    }
+
     @media print {
       body { background: #fff; padding: 8mm; }
       header, .toolbar, .back-link { display: none; }
       .grid { gap: 8px; grid-template-columns: repeat(3, 1fr); }
       .card { border: 1px solid #ccc; padding: 10px; box-shadow: none; break-inside: avoid; }
+      .install-block { box-shadow: none; page-break-after: avoid; }
+      .section-title { page-break-before: auto; }
       @page { margin: 10mm; }
     }
   </style>
@@ -161,6 +222,36 @@
     <button class="btn" onclick="window.print()">Vytisknout / uložit PDF</button>
     <a class="btn" href="./png/" download>Stáhnout PNG soubory</a>
   </div>
+
+  <section class="install-block" aria-label="Instalace jako aplikace">
+    <h2 class="install-block__title">Nainstalovat stezku jako aplikaci</h2>
+    <p class="install-block__lead">
+      Po přidání na plochu funguje průvodce i bez signálu — ideální pro sevřené údolí pod skalami. Tento text doporučujeme vytisknout u prvního (úvodního) panelu.
+    </p>
+
+    <div class="install-block__cols">
+      <div class="install-block__col">
+        <h3 class="install-block__platform">iPhone (Safari)</h3>
+        <ol>
+          <li>Otevři QR kód panelu ve Safari.</li>
+          <li>Klepni na <b>Sdílet</b> v dolní liště.</li>
+          <li>Vyber <b>„Přidat na plochu"</b>.</li>
+          <li>Potvrď <b>„Přidat"</b> vpravo nahoře.</li>
+        </ol>
+      </div>
+      <div class="install-block__col">
+        <h3 class="install-block__platform">Android (Chrome)</h3>
+        <ol>
+          <li>Otevři QR kód panelu v Chromu.</li>
+          <li>Klepni na ikonu <b>⋮</b> vpravo nahoře.</li>
+          <li>Vyber <b>„Nainstalovat aplikaci"</b>.</li>
+          <li>Potvrď <b>„Instalovat"</b>.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <h2 class="section-title">Zastavení</h2>
 
   <main class="grid" id="grid"></main>
 
