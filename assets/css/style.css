@@ -1090,6 +1090,68 @@ main {
 
 .completion-card__reset:hover { color: var(--fg); }
 
+/* ------------------------------------------------------------------ REVISIT BANNER */
+
+.revisit-banner {
+  margin: 14px 0 22px;
+  padding: 16px 18px 14px;
+  background: linear-gradient(180deg,
+    color-mix(in oklab, var(--amber-soft) 85%, var(--bg-card)),
+    var(--bg-card));
+  border: 1px solid color-mix(in oklab, var(--amber) 30%, var(--hairline));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  animation: banner-in 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@keyframes banner-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.revisit-banner__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.25rem;
+  margin: 0 0 4px;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+}
+
+.revisit-banner__title svg {
+  width: 22px;
+  height: 22px;
+  color: var(--amber);
+  flex-shrink: 0;
+}
+
+.revisit-banner__body {
+  margin: 0 0 14px;
+  color: var(--fg-dim);
+  font-size: 0.96rem;
+  line-height: 1.5;
+}
+
+.revisit-banner__body b {
+  color: var(--fg);
+  font-weight: 600;
+}
+
+.revisit-banner__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.revisit-banner__actions .btn {
+  min-height: 48px;
+  padding: 12px 16px;
+  font-size: 0.96rem;
+}
+
 /* ------------------------------------------------------------------ STATION-DETAIL: LOCKED BONUS */
 
 .locked-screen {

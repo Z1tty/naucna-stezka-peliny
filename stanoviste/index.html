@@ -141,14 +141,21 @@
       }
 
       // Mark visited ONLY when arriving via QR (or on the bonus — that's already gated)
+      let revisitInfo = null;
       if (viaQR) {
+        const visitedBefore = App.getVisited();
+        const wasAlreadyVisited = visitedBefore.has(s.id);
         App.markVisited(s.id);
-        // Show success toast
-        App.showToast(App.t(lang, 'qrRecorded'));
         // Strip via=qr from URL so refresh/share doesn't re-toast
         const clean = new URL(location.href);
         clean.searchParams.delete('via');
         history.replaceState(null, '', clean.toString());
+
+        if (wasAlreadyVisited && !s.bonus) {
+          revisitInfo = computeRevisit(s, allStations, visitedBefore);
+        } else {
+          App.showToast(App.t(lang, 'qrRecorded'));
+        }
       }
 
       // Media
@@ -233,7 +240,10 @@
         ? App.escapeHtml(App.t(lang, 'bonusEyebrow'))
         : (s.order + ' / ' + total + ' · ' + App.escapeHtml(s.subtitle || ''));
 
+      const revisitBanner = revisitInfo ? renderRevisitBanner(revisitInfo) : '';
+
       root.innerHTML =
+        revisitBanner +
         '<span class="station__eyebrow">' + eyebrow + '</span>' +
         '<h1 class="station__title">' + App.escapeHtml(s.title) + '</h1>' +
         media +
@@ -248,6 +258,56 @@
     } catch (e) {
       root.innerHTML = '<p class="error">' + App.escapeHtml(App.t(lang, 'loadErrorStation')) + '</p>';
       console.error(e);
+    }
+
+    function computeRevisit(currentStation, allStations, visitedBefore) {
+      const { main } = App.splitStations(allStations);
+      // Find the next unvisited main station (ordered)
+      const nextUnvisited = main.find(x => !visitedBefore.has(x.id));
+      return {
+        current: currentStation,
+        nextUnvisited: nextUnvisited || null,
+        allDone: !nextUnvisited
+      };
+    }
+
+    function renderRevisitBanner(info) {
+      const langQS2 = urlParams.get('lang') ? ('?lang=' + lang) : '';
+      let body = '';
+      let actions = '';
+      if (info.allDone) {
+        body = App.t(lang, 'revisitAll');
+        actions =
+          '<a class="btn btn--primary" href="../certifikat/' + langQS2 + '">' +
+            '<svg aria-hidden="true"><use href="#icon-award"/></svg>' +
+            '<span>' + App.escapeHtml(App.t(lang, 'revisitCertificate')) + '</span>' +
+          '</a>';
+      } else {
+        const next = info.nextUnvisited;
+        body = App.t(lang, 'revisitBody', { title: App.escapeHtml(next.title) });
+        const routeUrl = App.buildMapyRouteUrl(info.current.location, next.location);
+        if (routeUrl) {
+          actions =
+            '<a class="btn btn--mapy" href="' + routeUrl + '" target="_blank" rel="noopener">' +
+              '<svg aria-hidden="true"><use href="#icon-route"/></svg>' +
+              '<span>' + App.escapeHtml(App.t(lang, 'revisitNavigate')) + '</span>' +
+              '<img class="btn__mapy-logo" src="../assets/images/mapy-com-logo.svg" alt="Mapy.com" height="16">' +
+            '</a>';
+        }
+      }
+      return (
+        '<aside class="revisit-banner">' +
+          '<h3 class="revisit-banner__title">' +
+            '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' +
+              '<circle cx="12" cy="12" r="10"/>' +
+              '<path d="m16 8-2 6-6 2 2-6z"/>' +
+            '</svg>' +
+            App.escapeHtml(App.t(lang, 'revisitTitle')) +
+          '</h3>' +
+          '<p class="revisit-banner__body">' + body + '</p>' +
+          (actions ? '<div class="revisit-banner__actions">' + actions + '</div>' : '') +
+        '</aside>'
+      );
     }
 
     function renderLockedScreen(s, mainStations, visited) {

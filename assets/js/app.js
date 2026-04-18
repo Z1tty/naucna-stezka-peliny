@@ -38,12 +38,17 @@
       qrNotInSystem: 'QR kód <b>{code}</b> není v systému.',
       redirecting: 'Přesměrovávám…',
       redirectError: 'Chyba při přesměrování.',
-      footerCopy: '© Naučná stezka Peliny · Přírodní rezervace Peliny, Choceň',
-      footerAuthor: 'Autor aplikace',
+      footerCopy: 'Naučná stezka Peliny · Přírodní rezervace Peliny, Choceň',
+      footerApp: 'Aplikace',
 
       /* Gamification */
       qrRecorded: 'Zastavení zaznamenáno',
       qrNotCountedHint: 'Zastavení se počítá až po naskenování QR kódu přímo na místě.',
+      revisitTitle: 'Bloudíš?',
+      revisitBody: 'Tady už jsi byl. Nenavštívené zastavení je <b>{title}</b> — pojď tam.',
+      revisitAll: 'A co je nejlepší: máš hotovou celou stezku! Vezmi si certifikát nebo se podívej na tajné 11.',
+      revisitNavigate: 'Navigovat k dalšímu',
+      revisitCertificate: 'Otevřít certifikát',
       bonusEyebrow: 'Tajné zastavení',
       bonusSectionHeading: 'Bonus',
       bonusLockedTitle: '???',
@@ -113,11 +118,16 @@
       qrNotInSystem: 'QR code <b>{code}</b> is not in the system.',
       redirecting: 'Redirecting…',
       redirectError: 'Redirect error.',
-      footerCopy: '© Peliny Nature Trail · Peliny Nature Reserve, Choceň',
-      footerAuthor: 'Application by',
+      footerCopy: 'Peliny Nature Trail · Peliny Nature Reserve, Choceň',
+      footerApp: 'App',
 
       qrRecorded: 'Stop recorded',
       qrNotCountedHint: 'A stop counts only after you scan its QR code on site.',
+      revisitTitle: 'Lost?',
+      revisitBody: 'You\u2019ve been here already. The next unvisited stop is <b>{title}</b> — let\u2019s go there.',
+      revisitAll: 'And here is the good news: you have finished the whole trail! Grab your certificate or check out the secret 11th stop.',
+      revisitNavigate: 'Navigate to next',
+      revisitCertificate: 'Open certificate',
       bonusEyebrow: 'Secret stop',
       bonusSectionHeading: 'Bonus',
       bonusLockedTitle: '???',
@@ -273,11 +283,13 @@
   }
 
   function renderFooter(el, lang) {
+    const year = new Date().getFullYear();
     el.className = 'site-footer';
     el.innerHTML =
-      '<p class="site-footer__row">' + escapeHtml(t(lang, 'footerCopy')) + '</p>' +
-      '<p class="site-footer__row">' + escapeHtml(t(lang, 'footerAuthor')) +
-      ': <a href="https://www.smartghost.cz" target="_blank" rel="noopener">www.smartghost.cz</a></p>';
+      '<p class="site-footer__row">\u00a9 ' + year + ' ' + escapeHtml(t(lang, 'footerCopy')) + '</p>' +
+      '<p class="site-footer__row">' + escapeHtml(t(lang, 'footerApp')) +
+      ' \u00a9 ' + year +
+      ' <a href="https://www.smartghost.cz" target="_blank" rel="noopener">SmartGhost</a></p>';
   }
 
   function showToast(text, kind) {
