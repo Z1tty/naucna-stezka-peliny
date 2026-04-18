@@ -16,7 +16,7 @@
       of: 'z',
       nextStation: 'Další zastavení',
       backToOverview: 'Zpět na přehled',
-      showOnMap: 'Zobrazit na Mapy.cz',
+      showOnMap: 'Ukázat v',
       audioGuide: 'Audio průvodce',
       forKids: 'pro děti',
       playHint: 'Klepnutím spustíte přehrávání',
@@ -60,10 +60,18 @@
       /* Next-stop guidance */
       nextGuidanceTitle: 'Pokračujte k dalšímu zastavení',
       nextGuidanceText: 'Dojděte k dalšímu panelu podle šipek v terénu — nebo si nechte zobrazit trasu v mapě. U panelu naskenujte QR kód telefonem.',
-      navigateInMapy: 'Navigovat v Mapy.cz',
+      navigateInMapy: 'Navigovat v',
       skipAhead: 'Přeskočit na detail (bez zápisu návštěvy)',
       trailFinished: 'Dokončili jste stezku',
       trailFinishedSubtitle: 'Zpět do Chocně se dostanete modrou turistickou značkou podél řeky.',
+      scanQrBtn: 'Naskenovat QR',
+      scanQrTitle: 'Naskenujte QR kód',
+      scanQrHint: 'Nasměrujte kameru na QR kód u dalšího panelu.',
+      scanLoading: 'Načítám skener…',
+      scanCameraPerm: 'Povolte přístup ke kameře',
+      scanError: 'Nepodařilo se spustit kameru. Použijte QR skener v nativním fotoaparátu telefonu.',
+      scanUnknown: 'Tento QR kód není součástí naší stezky.',
+      scanClose: 'Zavřít',
 
       /* Certificate */
       certificateTitle: 'Certifikát',
@@ -83,7 +91,7 @@
       of: 'of',
       nextStation: 'Next stop',
       backToOverview: 'Back to overview',
-      showOnMap: 'Show on Mapy.cz',
+      showOnMap: 'Show in',
       audioGuide: 'Audio guide',
       forKids: 'for kids',
       playHint: 'Tap to play',
@@ -125,10 +133,18 @@
 
       nextGuidanceTitle: 'Continue to the next stop',
       nextGuidanceText: 'Follow the markers in the field — or have the route shown on a map. At the next panel, scan the QR code with your phone.',
-      navigateInMapy: 'Open route in Mapy.cz',
+      navigateInMapy: 'Open route in',
       skipAhead: 'Skip to detail (without recording visit)',
       trailFinished: 'You have completed the trail',
       trailFinishedSubtitle: 'To get back into Choceň, follow the blue tourist trail along the river.',
+      scanQrBtn: 'Scan QR',
+      scanQrTitle: 'Scan a QR code',
+      scanQrHint: 'Point the camera at the QR code on the next panel.',
+      scanLoading: 'Loading scanner…',
+      scanCameraPerm: 'Please allow camera access',
+      scanError: 'Could not start the camera. Use your phone\u2019s built-in QR scanner instead.',
+      scanUnknown: 'This QR code is not part of our trail.',
+      scanClose: 'Close',
 
       certificateTitle: 'Certificate',
       certificateEyebrow: 'Peliny Nature Trail',
@@ -218,12 +234,12 @@
   function buildMapyRouteUrl(fromLoc, toLoc) {
     if (!fromLoc || !toLoc) return null;
     const rp = `${fromLoc.lat},${fromLoc.lng};${toLoc.lat},${toLoc.lng}`;
-    return `https://mapy.cz/turisticka?planovani-trasy&rp=${encodeURIComponent(rp)}&rm=W`;
+    return `https://mapy.com/turisticka?planovani-trasy&rp=${encodeURIComponent(rp)}&rm=W`;
   }
 
   function buildMapyPointUrl(loc) {
     if (!loc) return null;
-    return `https://mapy.cz/zakladni?source=coor&id=${loc.lng},${loc.lat}&x=${loc.lng}&y=${loc.lat}&z=17`;
+    return `https://mapy.com/zakladni?source=coor&id=${loc.lng},${loc.lat}&x=${loc.lng}&y=${loc.lat}&z=17`;
   }
 
   function escapeHtml(s) {
@@ -285,12 +301,137 @@
     }, 2800);
   }
 
+  /* ------------------------- QR SCANNER ------------------------- */
+
+  const QR_LIB_URL = 'https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js';
+
+  function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      if ([...document.scripts].some(s => s.src === src)) return resolve();
+      const s = document.createElement('script');
+      s.src = src;
+      s.onload = resolve;
+      s.onerror = () => reject(new Error('Script load failed: ' + src));
+      document.head.appendChild(s);
+    });
+  }
+
+  function siteBaseUrl() {
+    const script = [...document.scripts].find(s => /\/assets\/js\/app\.js(\?.*)?$/.test(s.src));
+    if (script) return new URL('../../', script.src);
+    return new URL('./', location.href);
+  }
+
+  function tryResolveScan(decoded) {
+    const raw = (decoded || '').trim();
+    if (!raw) return null;
+
+    try {
+      const u = new URL(raw);
+      const site = siteBaseUrl();
+      const sameOrigin = u.origin === location.origin || u.origin === site.origin;
+      const sameHostFamily = u.hostname.endsWith('z1tty.github.io') || u.hostname.endsWith('chocen.cz');
+      if (sameOrigin || sameHostFamily) {
+        if (/\/qr\/?$/.test(u.pathname)) {
+          const c = u.searchParams.get('c');
+          if (c) {
+            const target = new URL('qr/', site);
+            target.searchParams.set('c', c);
+            return target.toString();
+          }
+        }
+        if (/\/stanoviste\/?$/.test(u.pathname)) {
+          const id = u.searchParams.get('id');
+          if (id) {
+            const target = new URL('stanoviste/', site);
+            target.searchParams.set('id', id);
+            target.searchParams.set('via', 'qr');
+            return target.toString();
+          }
+        }
+      }
+    } catch (e) { /* not a URL */ }
+
+    if (/^\d+$/.test(raw)) {
+      const target = new URL('qr/', siteBaseUrl());
+      target.searchParams.set('c', raw);
+      return target.toString();
+    }
+
+    return null;
+  }
+
+  async function openScanner(lang) {
+    const overlay = document.createElement('div');
+    overlay.className = 'scanner-modal';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.innerHTML =
+      '<div class="scanner-modal__inner">' +
+        '<button type="button" class="scanner-modal__close" aria-label="' + escapeHtml(t(lang, 'scanClose')) + '">\u2715</button>' +
+        '<h2 class="scanner-modal__title">' + escapeHtml(t(lang, 'scanQrTitle')) + '</h2>' +
+        '<div id="qrReader" class="scanner-modal__reader"></div>' +
+        '<p class="scanner-modal__hint">' + escapeHtml(t(lang, 'scanQrHint')) + '</p>' +
+        '<p id="scanStatus" class="scanner-modal__status">' + escapeHtml(t(lang, 'scanLoading')) + '</p>' +
+      '</div>';
+    document.body.appendChild(overlay);
+    document.body.style.overflow = 'hidden';
+
+    let scanner = null;
+    const status = overlay.querySelector('#scanStatus');
+
+    const close = async () => {
+      try {
+        if (scanner && scanner.isScanning) { await scanner.stop(); }
+        if (scanner) { await scanner.clear(); }
+      } catch (e) { /* ignore */ }
+      overlay.remove();
+      document.body.style.overflow = '';
+    };
+
+    overlay.querySelector('.scanner-modal__close').addEventListener('click', close);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+
+    try {
+      await loadScript(QR_LIB_URL);
+      if (!window.Html5Qrcode) throw new Error('Library not available');
+
+      status.textContent = t(lang, 'scanCameraPerm');
+      scanner = new Html5Qrcode('qrReader', { verbose: false });
+
+      await scanner.start(
+        { facingMode: 'environment' },
+        { fps: 10, qrbox: { width: 240, height: 240 } },
+        (decoded) => {
+          const target = tryResolveScan(decoded);
+          if (target) {
+            scanner.stop().catch(() => {}).finally(() => {
+              overlay.remove();
+              document.body.style.overflow = '';
+              location.href = target;
+            });
+          } else {
+            status.textContent = t(lang, 'scanUnknown');
+            status.className = 'scanner-modal__status scanner-modal__status--error';
+          }
+        },
+        () => { /* per-frame decode errors are noise */ }
+      );
+      status.textContent = '';
+    } catch (e) {
+      console.error('Scanner failed:', e);
+      status.textContent = t(lang, 'scanError');
+      status.className = 'scanner-modal__status scanner-modal__status--error';
+    }
+  }
+
   global.PelinyApp = {
     detectLang, setLang, t, I18N,
     dataFileUrl, getVisited, markVisited, clearVisited,
     getName, setName,
     splitStations, isMainCompleted,
     buildMapyRouteUrl, buildMapyPointUrl,
-    escapeHtml, renderLangSwitch, renderFooter, showToast
+    escapeHtml, renderLangSwitch, renderFooter, showToast,
+    openScanner, tryResolveScan
   };
 })(window);

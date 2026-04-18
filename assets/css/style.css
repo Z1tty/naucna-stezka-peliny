@@ -719,6 +719,43 @@ main {
   border-color: var(--muted);
 }
 
+.btn--mapy {
+  background: var(--bg-card);
+  color: var(--fg);
+  border: 1px solid var(--hairline);
+  box-shadow: var(--shadow-sm);
+  gap: 8px;
+}
+
+.btn--mapy:hover {
+  border-color: var(--muted);
+}
+
+.btn__mapy-logo {
+  height: 16px;
+  width: auto;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+@media (prefers-color-scheme: dark) {
+  .btn__mapy-logo {
+    filter: invert(1) hue-rotate(180deg);
+  }
+}
+
+.btn--scan {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 14px rgba(29, 109, 62, 0.28);
+  gap: 8px;
+}
+
+.btn--scan:hover {
+  background: var(--accent-dim);
+}
+
 .btn__content {
   display: flex;
   flex-direction: column;
@@ -1109,6 +1146,97 @@ main {
   border-color: var(--hairline);
   background: var(--bg-card);
   color: var(--muted);
+}
+
+/* ------------------------------------------------------------------ SCANNER MODAL */
+
+.scanner-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.scanner-modal__inner {
+  background: var(--bg-card);
+  color: var(--fg);
+  border-radius: var(--radius-lg);
+  max-width: 480px;
+  width: 100%;
+  padding: 24px 20px 20px;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+}
+
+.scanner-modal__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--hairline-soft);
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  line-height: 1;
+  color: var(--fg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scanner-modal__title {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin: 0 0 14px;
+  letter-spacing: -0.015em;
+}
+
+.scanner-modal__reader {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto 14px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+  aspect-ratio: 1 / 1;
+}
+
+.scanner-modal__reader video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+
+.scanner-modal__hint {
+  font-size: 0.9rem;
+  color: var(--muted);
+  text-align: center;
+  margin: 0 0 8px;
+}
+
+.scanner-modal__status {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-align: center;
+  margin: 0;
+  min-height: 1.3em;
+}
+
+.scanner-modal__status--error {
+  color: var(--danger);
 }
 
 /* ------------------------------------------------------------------ TOAST */
