@@ -230,13 +230,35 @@
           '</aside>';
       } else if (!s.bonus && !s.next) {
         // Last main station — trail finished
+        const startLoc = (data.meta && data.meta.startLocation) || null;
+        const backRouteUrl = App.buildMapyRouteUrl(s.location, startLoc);
+        const visitedSet = App.getVisited();
+        const mainDone = App.isMainCompleted(allStations, visitedSet);
+        const bonusStop = allStations.find(x => x.bonus);
+        const bonusCta = (mainDone && bonusStop)
+          ? '<a class="btn btn--mapy" href="?id=' + encodeURIComponent(bonusStop.id) + langQS + '">' +
+              '<svg aria-hidden="true"><use href="#icon-key"/></svg>' +
+              '<span>' + App.escapeHtml(App.t(lang, 'trailFinishedBonusCta')) + '</span>' +
+            '</a>'
+          : '';
+        const backBtn = backRouteUrl
+          ? '<a class="btn btn--mapy" href="' + backRouteUrl + '" target="_blank" rel="noopener">' +
+              '<svg aria-hidden="true"><use href="#icon-route"/></svg>' +
+              '<span>' + App.escapeHtml(App.t(lang, 'navigateToStart')) + '</span>' +
+              '<img class="btn__mapy-logo" src="../assets/images/mapy-com-logo.svg" alt="Mapy.com" height="16">' +
+            '</a>'
+          : '';
         nextGuidance =
           '<aside class="next-guidance">' +
             '<h3 class="next-guidance__title">' +
               '<svg aria-hidden="true"><use href="#icon-award"/></svg>' +
               App.escapeHtml(App.t(lang, 'trailFinished')) +
             '</h3>' +
-            '<p class="next-guidance__text">' + App.escapeHtml(App.t(lang, 'trailFinishedSubtitle')) + '</p>' +
+            '<p class="next-guidance__text">' + App.escapeHtml(App.t(lang, 'trailFinishedBonusHint')) + '</p>' +
+            (bonusCta ? '<div class="next-guidance__actions">' + bonusCta + '</div>' : '') +
+            (backBtn ? '<p class="next-guidance__text" style="margin-top:16px">' +
+              App.escapeHtml(App.t(lang, 'trailFinishedBackHint')) + '</p>' +
+              '<div class="next-guidance__actions">' + backBtn + '</div>' : '') +
           '</aside>';
       }
 

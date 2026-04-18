@@ -7,6 +7,7 @@
     "heroCredit": "Photo: Petr1888 / Wikimedia Commons, CC BY-SA 4.0",
     "heroCreditUrl": "https://commons.wikimedia.org/wiki/File:Pohled_na_Peliny_01.jpg",
     "trailMapUrl": "https://mapy.com/s/banuvabeju",
+    "startLocation": { "lat": 50.0004, "lng": 16.2160 },
     "stats": [
       {
         "label": "Stops",
