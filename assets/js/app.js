@@ -286,6 +286,11 @@
     const year = new Date().getFullYear();
     el.className = 'site-footer';
     el.innerHTML =
+      '<p class="site-footer__partners">' +
+        '<a href="https://www.zschocen.cz/" target="_blank" rel="noopener">Základní škola Sv. Čecha, Choceň</a>' +
+        '<span class="site-footer__sep" aria-hidden="true">·</span>' +
+        '<a href="https://www.chocen.cz/" target="_blank" rel="noopener">Město Choceň</a>' +
+      '</p>' +
       '<p class="site-footer__row">\u00a9 ' + year + ' ' + escapeHtml(t(lang, 'footerCopy')) + '</p>' +
       '<p class="site-footer__row">' + escapeHtml(t(lang, 'footerApp')) +
       ' \u00a9 ' + year +

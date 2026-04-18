@@ -907,6 +907,25 @@ main {
   margin-bottom: 0;
 }
 
+.site-footer__partners {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 6px 10px;
+  margin: 0 0 14px;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.site-footer__partners a {
+  color: var(--fg-dim);
+}
+
+.site-footer__sep {
+  color: var(--muted);
+}
+
 /* ------------------------------------------------------------------ BONUS / LOCKED STATES */
 
 .section-heading--bonus {
