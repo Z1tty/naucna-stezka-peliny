@@ -227,6 +227,20 @@
         bonusSection.hidden = false;
         bonusList.innerHTML = '';
         bonus.forEach(s => bonusList.appendChild(renderCard(s, visited.has(s.id), true, !allDone)));
+
+        // Intercept locked bonus clicks → show progress toast
+        if (!allDone) {
+          const visitedCount = main.filter(st => visited.has(st.id)).length;
+          bonusList.querySelectorAll('.station-link--locked').forEach(a => {
+            a.addEventListener('click', (e) => {
+              e.preventDefault();
+              App.showToast(
+                App.t(lang, 'bonusLockedToast', { visited: visitedCount, total: main.length }),
+                'warn'
+              );
+            });
+          });
+        }
       }
 
     } catch (e) {
@@ -269,7 +283,7 @@
         : '';
 
       li.innerHTML =
-        '<a class="' + classes.join(' ') + '" href="' + href2 + '"' + (isLocked ? ' aria-disabled="true" onclick="event.preventDefault()"' : '') + '>' +
+        '<a class="' + classes.join(' ') + '" href="' + href2 + '"' + (isLocked ? ' aria-disabled="true"' : '') + '>' +
           iconHtml + num + lockBadge + '</div>' +
           '<div class="station-link__body">' +
             '<h3 class="station-link__title">' + title + '</h3>' +
