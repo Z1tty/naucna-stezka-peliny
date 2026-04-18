@@ -54,6 +54,16 @@
     </section>
   </main>
 
+  <button class="fab-scan" id="fabScan" type="button" aria-label="Naskenovat QR">
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="7" height="7"/>
+      <rect x="14" y="3" width="7" height="7"/>
+      <rect x="3" y="14" width="7" height="7"/>
+      <path d="M14 14h3v3h-3zM17 17h4v4h-4zM14 20h3"/>
+    </svg>
+    <span class="fab-scan__label" id="fabScanLabel">Naskenovat QR</span>
+  </button>
+
   <footer class="site-footer" id="footer"></footer>
 
   <!-- Inline SVG icon library -->
@@ -87,6 +97,13 @@
 
     App.renderLangSwitch(document.getElementById('langSwitch'), lang, 'hero');
     App.renderFooter(document.getElementById('footer'), lang);
+
+    const fab = document.getElementById('fabScan');
+    if (fab) {
+      fab.setAttribute('aria-label', App.t(lang, 'scanQrBtn'));
+      document.getElementById('fabScanLabel').textContent = App.t(lang, 'scanQrBtn');
+      fab.addEventListener('click', () => App.openScanner(lang));
+    }
 
     document.getElementById('loadingText').textContent = App.t(lang, 'loading');
     document.getElementById('sectionHeading').textContent = App.t(lang, 'stationsHeading');
