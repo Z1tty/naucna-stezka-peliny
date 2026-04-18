@@ -47,8 +47,8 @@
           '<br><a href="../?lang=' + lang + '">' + App.escapeHtml(App.t(lang, 'backToOverview')) + '</a>';
         return;
       }
-      const qs = '?id=' + encodeURIComponent(target) + '&lang=' + lang;
-      location.replace('../stanoviste/' + qs);
+      // Include via=qr so station page marks as visited
+      location.replace('../stanoviste/?id=' + encodeURIComponent(target) + '&via=qr&lang=' + lang);
     } catch (e) {
       msg.className = 'error';
       msg.textContent = App.t(lang, 'redirectError');

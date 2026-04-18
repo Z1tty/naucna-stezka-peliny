@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1d6d3e">
+  <title>Certifikát – Naučná stezka Peliny</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/app.js" defer></script>
+</head>
+<body class="cert-page">
+
+  <div class="cert-actions">
+    <a class="btn btn--secondary" id="backLink" href="../">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      <span id="backLabel">Zpět</span>
+    </a>
+    <button class="btn btn--primary" id="printBtn" type="button" hidden>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V4h12v5"/><rect x="4" y="9" width="16" height="8" rx="1"/><path d="M6 17v4h12v-4"/></svg>
+      <span id="printLabel">Vytisknout</span>
+    </button>
+  </div>
+
+  <main id="certRoot">
+    <p class="loading" id="loadingText"><span class="spinner"></span> Načítám…</p>
+  </main>
+
+  <script>
+  window.addEventListener('DOMContentLoaded', async () => {
+    const App = window.PelinyApp;
+    const lang = App.detectLang();
+    document.documentElement.lang = lang;
+    document.title = App.t(lang, 'certificateTitle') + ' – Peliny';
+
+    document.getElementById('backLabel').textContent = (lang === 'cs' ? 'Zpět' : 'Back');
+    document.getElementById('printLabel').textContent = App.t(lang, 'certificatePrint');
+
+    const root = document.getElementById('certRoot');
+
+    try {
+      const res = await fetch(App.dataFileUrl(lang, '../'), { cache: 'no-cache' });
+      const data = await res.json();
+      const allStations = data.stations || [];
+      const { main } = App.splitStations(allStations);
+      const visited = App.getVisited();
+      const done = App.isMainCompleted(allStations, visited);
+
+      if (!done) {
+        const visitedCount = main.filter(s => visited.has(s.id)).length;
+        root.innerHTML =
+          '<div class="locked-screen">' +
+            '<div class="locked-screen__icon">' +
+              '<svg aria-hidden="true"><use href="#icon-lock"/></svg>' +
+            '</div>' +
+            '<h1 class="locked-screen__title">' + App.escapeHtml(App.t(lang, 'certificateTitle')) + '</h1>' +
+            '<p class="locked-screen__text">' + App.escapeHtml(App.t(lang, 'certificateLocked')) + '</p>' +
+            '<div class="locked-screen__progress">' +
+              App.escapeHtml(App.t(lang, 'bonusLockedProgress')) + ': <b>' + visitedCount + ' / ' + main.length + '</b>' +
+            '</div>' +
+            '<div class="actions">' +
+              '<a class="btn btn--primary" href="../?lang=' + lang + '">' +
+                '<span>' + App.escapeHtml(App.t(lang, 'backToTrail')) + '</span>' +
+              '</a>' +
+            '</div>' +
+          '</div>';
+        return;
+      }
+
+      document.getElementById('printBtn').hidden = false;
+
+      const name = App.getName();
+      const today = new Date();
+      const dateStr = today.toLocaleDateString(lang === 'en' ? 'en-GB' : 'cs-CZ', {
+        day: 'numeric', month: 'long', year: 'numeric'
+      });
+
+      root.innerHTML =
+        '<div class="cert" role="document">' +
+          '<div class="cert__frame">' +
+            '<div class="cert__eyebrow">' + App.escapeHtml(App.t(lang, 'certificateEyebrow')) + '</div>' +
+            '<h1 class="cert__title">' + App.escapeHtml(App.t(lang, 'certificateTitle')) + '</h1>' +
+            '<p class="cert__body">' + App.escapeHtml(App.t(lang, 'certificateBody1')) + '</p>' +
+            '<div class="cert__name" id="certNameWrap">' +
+              '<input class="cert__name-input" id="certNameInput" type="text" placeholder="' +
+                App.escapeHtml(App.t(lang, 'certificateNamePlaceholder')) + '" value="' + App.escapeHtml(name) + '" autocomplete="name" maxlength="60">' +
+            '</div>' +
+            '<p class="cert__body">' + App.escapeHtml(App.t(lang, 'certificateBody2')) + '</p>' +
+            '<ul class="cert__stations">' +
+              main.map(s => '<li>' + App.escapeHtml(s.title) + '</li>').join('') +
+            '</ul>' +
+            '<div class="cert__meta">' +
+              '<div class="cert__meta-item">' + App.escapeHtml(App.t(lang, 'certificateDate')) +
+                '<b>' + dateStr + '</b></div>' +
+              '<div class="cert__meta-item">' + (lang === 'cs' ? 'Místo' : 'Place') +
+                '<b>' + App.escapeHtml(App.t(lang, 'certificatePlace')) + '</b></div>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+
+      const input = document.getElementById('certNameInput');
+      input.addEventListener('input', () => App.setName(input.value));
+      input.addEventListener('blur', () => App.setName(input.value));
+
+      document.getElementById('printBtn').addEventListener('click', () => {
+        App.setName(input.value);
+        window.print();
+      });
+    } catch (e) {
+      root.innerHTML = '<p class="error">' + App.escapeHtml(App.t(lang, 'loadError')) + '</p>';
+      console.error(e);
+    }
+  });
+  </script>
+
+  <!-- SVG sprite (minimal for certificate page) -->
+  <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+    <defs>
+      <symbol id="icon-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 1 1 8 0v4"/></symbol>
+    </defs>
+  </svg>
+</body>
+</html>

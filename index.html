@@ -21,7 +21,7 @@
     <div class="hero__overlay"></div>
     <nav class="lang-switch lang-switch--hero" id="langSwitch"></nav>
     <div class="hero__content">
-      <span class="hero__eyebrow" id="heroEyebrow">Peliny</span>
+      <span class="hero__eyebrow" id="heroEyebrow">Naučná stezka</span>
       <h1 class="hero__title" id="heroTitle">…</h1>
       <p class="hero__subtitle" id="heroSubtitle"></p>
     </div>
@@ -33,18 +33,25 @@
     <ul class="stats" id="stats"></ul>
 
     <div class="progress-banner" id="progressBanner" hidden>
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M20 6 9 17l-5-5"/>
-      </svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
       <span><span id="visitedLabel">Navštíveno</span>: <span class="progress-banner__count" id="progressCount">0</span> <span id="progressOf">z</span> <span id="progressTotal">10</span></span>
       <button class="progress-banner__reset" id="progressReset" type="button">Vynulovat</button>
     </div>
+
+    <section id="completionSection" hidden></section>
 
     <h2 class="section-heading" id="sectionHeading">Zastavení</h2>
 
     <ul class="stations" id="stations">
       <li class="loading"><span class="spinner"></span> <span id="loadingText">Načítám…</span></li>
     </ul>
+
+    <section id="bonusSection" hidden>
+      <h2 class="section-heading section-heading--bonus">
+        <span id="bonusSectionHeading">Bonus</span>
+      </h2>
+      <ul class="stations" id="bonusStations"></ul>
+    </section>
   </main>
 
   <footer class="site-footer" id="footer"></footer>
@@ -63,8 +70,12 @@
       <symbol id="icon-snail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="13" r="6"/><circle cx="10" cy="13" r="3.5"/><circle cx="10" cy="13" r="1.5"/><path d="M16 13c1 0 2-1 3-2s1-3 1-5"/><circle cx="20" cy="6" r="0.8" fill="currentColor"/><path d="M4 19h14"/></symbol>
       <symbol id="icon-bird" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 7c-3 0-6 2-6 6s3 5 3 5-1 3-4 3h10c1 0 3-1 3-3 0-4-3-11-6-11z"/><circle cx="17" cy="8" r="0.7" fill="currentColor"/><path d="M20 9l2-1"/></symbol>
       <symbol id="icon-vista" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="6" r="2"/><path d="M3 18h18"/><path d="m3 18 5-8 4 5 3-3 6 6"/><path d="M3 22h18"/></symbol>
+      <symbol id="icon-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="17" r="3.5"/><path d="m9.5 14.5 10-10"/><path d="m14 10 3 3"/><path d="m17 7 2.5 2.5"/></symbol>
+      <symbol id="icon-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 1 1 8 0v4"/></symbol>
+      <symbol id="icon-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m9 15-2 7 5-3 5 3-2-7"/></symbol>
       <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
       <symbol id="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+      <symbol id="icon-sparkle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2 2M16 16l2 2M6 18l2-2M16 8l2-2"/></symbol>
     </defs>
   </svg>
 
@@ -77,14 +88,17 @@
     App.renderLangSwitch(document.getElementById('langSwitch'), lang, 'hero');
     App.renderFooter(document.getElementById('footer'), lang);
 
-    // Static UI strings
     document.getElementById('loadingText').textContent = App.t(lang, 'loading');
     document.getElementById('sectionHeading').textContent = App.t(lang, 'stationsHeading');
     document.getElementById('visitedLabel').textContent = App.t(lang, 'visitedLabel');
     document.getElementById('progressOf').textContent = App.t(lang, 'of');
     document.getElementById('progressReset').textContent = App.t(lang, 'resetBtn');
+    document.getElementById('bonusSectionHeading').textContent = App.t(lang, 'bonusSectionHeading');
 
     const list = document.getElementById('stations');
+    const bonusSection = document.getElementById('bonusSection');
+    const bonusList = document.getElementById('bonusStations');
+    const completionSection = document.getElementById('completionSection');
     const hero = document.getElementById('hero');
     const heroImage = document.getElementById('heroImage');
     const heroEyebrow = document.getElementById('heroEyebrow');
@@ -102,20 +116,18 @@
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const data = await res.json();
       const meta = data.meta || {};
-      const stations = (data.stations || []).sort((a, b) => a.order - b.order);
+      const { main, bonus } = App.splitStations(data.stations || []);
+      const visited = App.getVisited();
+      const allDone = App.isMainCompleted(data.stations, visited);
 
       document.title = meta.title || 'Peliny';
       heroEyebrow.textContent = lang === 'cs' ? 'Naučná stezka' : 'Nature trail';
       heroTitle.textContent = meta.title || '';
       heroSubtitle.textContent = meta.subtitle || '';
-      if (meta.heroImage) {
-        heroImage.src = meta.heroImage;
-      } else {
-        hero.style.display = 'none';
-      }
+      if (meta.heroImage) heroImage.src = meta.heroImage;
+      else hero.style.display = 'none';
       intro.textContent = meta.intro || '';
 
-      // Stats
       stats.innerHTML = '';
       (meta.stats || []).forEach(s => {
         const li = document.createElement('li');
@@ -124,36 +136,47 @@
         stats.appendChild(li);
       });
 
-      // Visited state
-      const visited = App.getVisited();
-      bannerTotal.textContent = stations.length;
-      const n = stations.filter(s => visited.has(s.id)).length;
+      // Visited banner
+      bannerTotal.textContent = main.length;
+      const n = main.filter(s => visited.has(s.id)).length;
       bannerCount.textContent = n;
-      if (n > 0) banner.hidden = false;
+      if (n > 0 && !allDone) banner.hidden = false;
 
-      // Render stations
-      list.innerHTML = '';
-      stations.forEach(s => {
-        const li = document.createElement('li');
-        const isVisited = visited.has(s.id);
-        const num = isVisited
-          ? '<span class="station-link__num"><svg aria-hidden="true"><use href="#icon-check"/></svg></span>'
-          : '<span class="station-link__num">' + s.order + '</span>';
-        const thumb = s.image
-          ? '<div class="station-link__thumb"><img src="' + App.escapeHtml(s.image) + '" alt="" loading="lazy">' + num + '</div>'
-          : '<div class="station-link__thumb station-link__thumb--icon"><svg aria-hidden="true"><use href="#icon-' + App.escapeHtml(s.icon || 'sign') + '"/></svg>' + num + '</div>';
-
-        li.innerHTML =
-          '<a class="station-link' + (isVisited ? ' is-visited' : '') + '" href="stanoviste/?id=' + encodeURIComponent(s.id) + '">' +
-            thumb +
-            '<div class="station-link__body">' +
-              '<h3 class="station-link__title">' + App.escapeHtml(s.title) + '</h3>' +
-              '<p class="station-link__subtitle">' + App.escapeHtml(s.subtitle || '') + '</p>' +
+      // Completion card
+      if (allDone) {
+        completionSection.hidden = false;
+        const langQS = new URLSearchParams(location.search).get('lang') ? ('?lang=' + lang) : '';
+        completionSection.innerHTML =
+          '<div class="completion-card">' +
+            '<div class="completion-card__eyebrow">' +
+              '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.4 7.2h7.6l-6.2 4.5 2.4 7.3L12 16.6 5.8 21l2.4-7.3L2 9.2h7.6z"/></svg>' +
+              '10 / 10' +
             '</div>' +
-            '<span class="station-link__arrow" aria-hidden="true"><svg><use href="#icon-arrow"/></svg></span>' +
-          '</a>';
-        list.appendChild(li);
-      });
+            '<h3 class="completion-card__title">' + App.escapeHtml(App.t(lang, 'completionTitle')) + '</h3>' +
+            '<p class="completion-card__text">' + App.escapeHtml(App.t(lang, 'completionSubtitle')) + '</p>' +
+            '<div class="completion-card__actions">' +
+              '<a class="btn btn--primary" href="certifikat/' + langQS + '">' +
+                '<svg aria-hidden="true"><use href="#icon-award"/></svg>' +
+                '<span>' + App.escapeHtml(App.t(lang, 'certificateCta')) + '</span>' +
+              '</a>' +
+              (bonus[0] ? '<a class="btn btn--secondary" href="stanoviste/?id=' + encodeURIComponent(bonus[0].id) + (langQS ? '&lang=' + lang : '') + '">' +
+                '<svg aria-hidden="true"><use href="#icon-key"/></svg>' +
+                '<span>' + App.escapeHtml(App.t(lang, 'bonusCta')) + '</span>' +
+              '</a>' : '') +
+            '</div>' +
+          '</div>';
+      }
+
+      // Main list
+      list.innerHTML = '';
+      main.forEach(s => list.appendChild(renderCard(s, visited.has(s.id), false, false)));
+
+      // Bonus section: always visible, locked or unlocked
+      if (bonus.length) {
+        bonusSection.hidden = false;
+        bonusList.innerHTML = '';
+        bonus.forEach(s => bonusList.appendChild(renderCard(s, visited.has(s.id), true, !allDone)));
+      }
 
       reset.addEventListener('click', () => {
         if (confirm(App.t(lang, 'resetConfirm'))) {
@@ -164,6 +187,53 @@
     } catch (e) {
       list.innerHTML = '<li class="error">' + App.escapeHtml(App.t(lang, 'loadError')) + '</li>';
       console.error(e);
+    }
+
+    function renderCard(s, isVisited, isBonus, isLocked) {
+      const li = document.createElement('li');
+      const langQS = new URLSearchParams(location.search).get('lang') ? ('&lang=' + lang) : '';
+
+      // Always use pictogram on the list — photos are reserved for station detail
+      const iconHtml = '<div class="station-link__thumb station-link__thumb--icon"><svg aria-hidden="true"><use href="#icon-' + App.escapeHtml(s.icon || 'sign') + '"/></svg>';
+
+      const num = isVisited
+        ? '<span class="station-link__num"><svg aria-hidden="true"><use href="#icon-check"/></svg></span>'
+        : '<span class="station-link__num">' + s.order + '</span>';
+      const lockBadge = isLocked ? '<span class="station-link__lock"><svg aria-hidden="true"><use href="#icon-lock"/></svg></span>' : '';
+
+      const title = isLocked ? App.t(lang, 'bonusLockedTitle') : App.escapeHtml(s.title);
+      const subtitle = isLocked
+        ? App.escapeHtml(App.t(lang, 'bonusLockedSubtitle'))
+        : App.escapeHtml(s.subtitle || '');
+
+      const classes = ['station-link'];
+      if (isVisited) classes.push('is-visited');
+      if (isBonus) classes.push('station-link--bonus');
+      if (isLocked) classes.push('station-link--locked');
+
+      const href = isLocked
+        ? '#'
+        : 'stanoviste/?id=' + encodeURIComponent(s.id) + (langQS.replace('&','?'));
+      // Fix the href querystring
+      const href2 = isLocked
+        ? '#'
+        : 'stanoviste/?id=' + encodeURIComponent(s.id) + langQS;
+
+      const badge = isBonus && !isLocked
+        ? '<span class="station-link__badge"><svg aria-hidden="true"><use href="#icon-sparkle"/></svg>' + App.escapeHtml(App.t(lang, 'bonusUnlockedBadge')) + '</span>'
+        : '';
+
+      li.innerHTML =
+        '<a class="' + classes.join(' ') + '" href="' + href2 + '"' + (isLocked ? ' aria-disabled="true" onclick="event.preventDefault()"' : '') + '>' +
+          iconHtml + num + lockBadge + '</div>' +
+          '<div class="station-link__body">' +
+            '<h3 class="station-link__title">' + title + '</h3>' +
+            '<p class="station-link__subtitle">' + subtitle + '</p>' +
+            badge +
+          '</div>' +
+          (isLocked ? '' : '<span class="station-link__arrow" aria-hidden="true"><svg><use href="#icon-arrow"/></svg></span>') +
+        '</a>';
+      return li;
     }
   });
   </script>

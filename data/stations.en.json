@@ -190,6 +190,25 @@
       "location": { "lat": 50.0028, "lng": 16.2228 },
       "durationToNext": null,
       "next": null
+    },
+    {
+      "id": "zapomenuty-pramen",
+      "order": 11,
+      "bonus": true,
+      "title": "The Forgotten Spring",
+      "subtitle": "Hidden 11th stop",
+      "icon": "key",
+      "image": null,
+      "audio": "assets/audio/demo.mp3",
+      "text": [
+        "Below the cliffs, near where Pel's Mill once stood, a spring still seeps from the ground. Hidden behind moss-covered boulders, most visitors walk past without ever noticing it.",
+        "For centuries the spring supplied drinking water to the miller's family and to travellers passing along the hillside. Water from the chalk bedrock is gently calcareous — good for brewing, less so for plants, whose roots slowly turn to stone in its flow.",
+        "Today the spring is no longer officially maintained, but for those who walk the trail attentively, it remains a quiet coda to the Peliny story. Congratulations — you have just found your reward for patience."
+      ],
+      "childText": "You found a secret place! Below the cliffs, where the old mill used to stand, a tiny spring is still bubbling. Most people walk right past without noticing — but you are observer number one! The miller's family used it for drinking, for cooking, and even for the mill wheel. The spring is still flowing today, just a little hidden behind the moss.",
+      "location": { "lat": 50.0013, "lng": 16.2188 },
+      "durationToNext": null,
+      "next": null
     }
   ]
 }

@@ -190,6 +190,25 @@
       "location": { "lat": 50.0028, "lng": 16.2228 },
       "durationToNext": null,
       "next": null
+    },
+    {
+      "id": "zapomenuty-pramen",
+      "order": 11,
+      "bonus": true,
+      "title": "Zapomenutý pramen",
+      "subtitle": "Tajné 11. zastavení",
+      "icon": "key",
+      "image": null,
+      "audio": "assets/audio/demo.mp3",
+      "text": [
+        "Pod skalami u místa, kde stával Pelův mlýn, dodnes vyvěrá pramen. Je skrytý za balvany porostlými mechem — většina návštěvníků kolem něj projde, aniž by si ho všimla.",
+        "Pramen byl po staletí zdrojem pitné vody pro mlynářovu rodinu i pro cestující, kteří se po úbočí pohybovali. Voda z opukového podloží je jemně vápenitá — proto dobrá k vaření, horší pro rostliny, jimž kořeny postupně kamenatí.",
+        "Dnes pramen není oficiálně udržován, ale pro ty, kdo projdou stezku pozorně, zůstává tichým doplněním příběhu Pelin. Gratulujeme — právě jste našli odměnu za trpělivost."
+      ],
+      "childText": "Našli jste tajné místo! Pod skalami u bývalého mlýna teče malý pramínek. Většina lidí kolem něj projde a ani si ho nevšimne — vy jste pozorovatelé číslo jedna. V mlýně z něj mlynářova rodina brala vodu na pití, na vaření i pro mlýnské kolo. Pramen tam teče dodnes, jen je trochu schovaný za mechem.",
+      "location": { "lat": 50.0013, "lng": 16.2188 },
+      "durationToNext": null,
+      "next": null
     }
   ]
 }

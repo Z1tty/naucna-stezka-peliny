@@ -5,6 +5,7 @@
 (function (global) {
   const LANG_KEY = 'peliny:lang';
   const VISITED_KEY = 'peliny:visited';
+  const NAME_KEY = 'peliny:name';
   const SUPPORTED = ['cs', 'en'];
   const DEFAULT_LANG = 'cs';
 
@@ -35,7 +36,43 @@
       redirecting: 'Přesměrovávám…',
       redirectError: 'Chyba při přesměrování.',
       footerCopy: '© Naučná stezka Peliny · Přírodní rezervace Peliny, Choceň',
-      footerAuthor: 'Autor aplikace'
+      footerAuthor: 'Autor aplikace',
+
+      /* Gamification */
+      qrRecorded: 'Zastavení zaznamenáno',
+      qrNotCountedHint: 'Zastavení se počítá až po naskenování QR kódu přímo na místě.',
+      bonusEyebrow: 'Tajné zastavení',
+      bonusSectionHeading: 'Bonus',
+      bonusLockedTitle: '???',
+      bonusLockedSubtitle: 'Odemkne se po naskenování všech 10 zastavení',
+      bonusUnlockedBadge: 'Odemčeno',
+      completionTitle: 'Gratulujeme! Zvládli jste celou stezku.',
+      completionSubtitle: 'Odemkli jste tajné 11. zastavení a můžete si stáhnout certifikát.',
+      certificateCta: 'Zobrazit certifikát',
+      bonusCta: 'Otevřít tajné zastavení',
+      bonusLockedMessage: 'Toto zastavení se odemkne až poté, co na všech 10 panelech naskenujete QR kód.',
+      bonusLockedProgress: 'Dosavadní postup',
+      backToTrail: 'Zpět na stezku',
+
+      /* Next-stop guidance */
+      nextGuidanceTitle: 'Pokračujte k dalšímu zastavení',
+      nextGuidanceText: 'Dojděte k dalšímu panelu podle šipek v terénu — nebo si nechte zobrazit trasu v mapě. U panelu naskenujte QR kód telefonem.',
+      navigateInMapy: 'Navigovat v Mapy.cz',
+      skipAhead: 'Přeskočit na detail (bez zápisu návštěvy)',
+      trailFinished: 'Dokončili jste stezku',
+      trailFinishedSubtitle: 'Zpět do Chocně se dostanete modrou turistickou značkou podél řeky.',
+
+      /* Certificate */
+      certificateTitle: 'Certifikát',
+      certificateEyebrow: 'Naučná stezka Peliny',
+      certificateBody1: 'Tímto se potvrzuje, že',
+      certificateBody2: 'prošel/prošla naučnou stezku Peliny u Chocně a úspěšně zdolal/zdolala všech 10 zastavení.',
+      certificatePlace: 'Choceň, Přírodní rezervace Peliny',
+      certificateDate: 'Dne',
+      certificateNameLabel: 'Jméno (volitelné)',
+      certificateNamePlaceholder: 'Vaše jméno',
+      certificatePrint: 'Vytisknout / uložit PDF',
+      certificateLocked: 'Certifikát je dostupný až po naskenování všech 10 QR kódů.'
     },
     en: {
       trail: 'Trail',
@@ -63,7 +100,40 @@
       redirecting: 'Redirecting…',
       redirectError: 'Redirect error.',
       footerCopy: '© Peliny Nature Trail · Peliny Nature Reserve, Choceň',
-      footerAuthor: 'Application by'
+      footerAuthor: 'Application by',
+
+      qrRecorded: 'Stop recorded',
+      qrNotCountedHint: 'A stop counts only after you scan its QR code on site.',
+      bonusEyebrow: 'Secret stop',
+      bonusSectionHeading: 'Bonus',
+      bonusLockedTitle: '???',
+      bonusLockedSubtitle: 'Unlocks after you scan all 10 QR codes',
+      bonusUnlockedBadge: 'Unlocked',
+      completionTitle: 'Congratulations! You finished the whole trail.',
+      completionSubtitle: 'You have unlocked the hidden 11th stop and can download a certificate.',
+      certificateCta: 'View certificate',
+      bonusCta: 'Open the secret stop',
+      bonusLockedMessage: 'This stop will unlock only after you scan the QR code at all 10 panels.',
+      bonusLockedProgress: 'Current progress',
+      backToTrail: 'Back to the trail',
+
+      nextGuidanceTitle: 'Continue to the next stop',
+      nextGuidanceText: 'Follow the markers in the field — or have the route shown on a map. At the next panel, scan the QR code with your phone.',
+      navigateInMapy: 'Open route in Mapy.cz',
+      skipAhead: 'Skip to detail (without recording visit)',
+      trailFinished: 'You have completed the trail',
+      trailFinishedSubtitle: 'To get back into Choceň, follow the blue tourist trail along the river.',
+
+      certificateTitle: 'Certificate',
+      certificateEyebrow: 'Peliny Nature Trail',
+      certificateBody1: 'This is to certify that',
+      certificateBody2: 'has walked the Peliny Nature Trail near Choceň and successfully completed all 10 stops.',
+      certificatePlace: 'Choceň, Peliny Nature Reserve',
+      certificateDate: 'Date',
+      certificateNameLabel: 'Name (optional)',
+      certificateNamePlaceholder: 'Your name',
+      certificatePrint: 'Print / save as PDF',
+      certificateLocked: 'The certificate will be available after you scan all 10 QR codes.'
     }
   };
 
@@ -77,7 +147,6 @@
       const stored = localStorage.getItem(LANG_KEY);
       if (SUPPORTED.includes(stored)) return stored;
     } catch (e) {}
-
     const candidates = navigator.languages || [navigator.language || DEFAULT_LANG];
     for (const raw of candidates) {
       const lc = (raw || '').toLowerCase();
@@ -94,9 +163,7 @@
 
   function t(lang, key, params) {
     let s = (I18N[lang] && I18N[lang][key]) || (I18N[DEFAULT_LANG] && I18N[DEFAULT_LANG][key]) || key;
-    if (params) {
-      for (const k in params) s = s.replace('{' + k + '}', params[k]);
-    }
+    if (params) for (const k in params) s = s.replace('{' + k + '}', params[k]);
     return s;
   }
 
@@ -106,11 +173,8 @@
   }
 
   function getVisited() {
-    try {
-      return new Set(JSON.parse(localStorage.getItem(VISITED_KEY) || '[]'));
-    } catch (e) {
-      return new Set();
-    }
+    try { return new Set(JSON.parse(localStorage.getItem(VISITED_KEY) || '[]')); }
+    catch (e) { return new Set(); }
   }
 
   function markVisited(id) {
@@ -123,6 +187,37 @@
 
   function clearVisited() {
     try { localStorage.removeItem(VISITED_KEY); } catch (e) {}
+  }
+
+  function getName() {
+    try { return localStorage.getItem(NAME_KEY) || ''; } catch (e) { return ''; }
+  }
+
+  function setName(name) {
+    try { localStorage.setItem(NAME_KEY, name || ''); } catch (e) {}
+  }
+
+  function splitStations(stations) {
+    const main = stations.filter(s => !s.bonus).sort((a, b) => a.order - b.order);
+    const bonus = stations.filter(s => s.bonus).sort((a, b) => a.order - b.order);
+    return { main, bonus };
+  }
+
+  function isMainCompleted(stations, visited) {
+    const { main } = splitStations(stations);
+    if (!main.length) return false;
+    return main.every(s => visited.has(s.id));
+  }
+
+  function buildMapyRouteUrl(fromLoc, toLoc) {
+    if (!fromLoc || !toLoc) return null;
+    const rp = `${fromLoc.lat},${fromLoc.lng};${toLoc.lat},${toLoc.lng}`;
+    return `https://mapy.cz/turisticka?planovani-trasy&rp=${encodeURIComponent(rp)}&rm=W`;
+  }
+
+  function buildMapyPointUrl(loc) {
+    if (!loc) return null;
+    return `https://mapy.cz/zakladni?source=coor&id=${loc.lng},${loc.lat}&x=${loc.lng}&y=${loc.lat}&z=17`;
   }
 
   function escapeHtml(s) {
@@ -163,9 +258,33 @@
       ': <a href="https://www.smartghost.cz" target="_blank" rel="noopener">www.smartghost.cz</a></p>';
   }
 
+  function showToast(text, kind) {
+    let host = document.getElementById('toastHost');
+    if (!host) {
+      host = document.createElement('div');
+      host.id = 'toastHost';
+      host.className = 'toast-host';
+      document.body.appendChild(host);
+    }
+    const el = document.createElement('div');
+    el.className = 'toast' + (kind ? ' toast--' + kind : '');
+    el.innerHTML =
+      '<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>' +
+      '<span>' + escapeHtml(text) + '</span>';
+    host.appendChild(el);
+    requestAnimationFrame(() => el.classList.add('is-visible'));
+    setTimeout(() => {
+      el.classList.remove('is-visible');
+      el.addEventListener('transitionend', () => el.remove(), { once: true });
+    }, 2800);
+  }
+
   global.PelinyApp = {
     detectLang, setLang, t, I18N,
     dataFileUrl, getVisited, markVisited, clearVisited,
-    escapeHtml, renderLangSwitch, renderFooter
+    getName, setName,
+    splitStations, isMainCompleted,
+    buildMapyRouteUrl, buildMapyPointUrl,
+    escapeHtml, renderLangSwitch, renderFooter, showToast
   };
 })(window);
