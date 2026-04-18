@@ -589,17 +589,26 @@ main {
 /* ------------------------------------------------------------------ GALLERY (top carousel) */
 
 .station__gallery {
-  margin: 4px -18px 24px;
   position: relative;
+  margin: 4px -18px 24px;
   background: var(--bg-deep);
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+}
+
+/* Fallback for browsers without aspect-ratio support (older Safari/FF) */
+@supports not (aspect-ratio: 3/2) {
+  .station__gallery { padding-top: 66.666%; position: relative; height: 0; }
+  .station__gallery-scroll { position: absolute; inset: 0; }
 }
 
 .station__gallery-scroll {
+  width: 100%;
+  height: 100%;
   display: flex;
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
-  aspect-ratio: 3 / 2;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
 }
@@ -608,9 +617,10 @@ main {
 
 .station__gallery-item {
   flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
   scroll-snap-align: start;
   position: relative;
-  min-width: 0;
 }
 
 .station__gallery-item img {
