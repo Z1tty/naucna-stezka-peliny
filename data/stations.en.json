@@ -2,38 +2,30 @@
   "meta": {
     "title": "Peliny Nature Trail",
     "subtitle": "A nature reserve above the Tichá Orlice river",
-    "intro": "Ten stops lead through a rocky reserve near the town of Choceň — from the history of Pel's Mill through the monumental chalk cliffs all the way to Doskočil's Viewpoint above the town.",
+    "intro": "Nine stops in the Peliny Nature Reserve near Choceň — each panel has a QR code. Scan it with your phone and a page opens with commentary, a photo and a children's audio guide. The trail leads you from the monumental chalk walls, past the history of Pel's Mill, up to Doskočil's Viewpoint above the town. After scanning all stops a bonus location and a completion certificate unlock.",
     "heroImage": "assets/images/hero-peliny.jpg",
     "heroCredit": "Photo: Petr1888 / Wikimedia Commons, CC BY-SA 4.0",
     "heroCreditUrl": "https://commons.wikimedia.org/wiki/File:Pohled_na_Peliny_01.jpg",
+    "trailMapUrl": "https://mapy.com/s/banuvabeju",
     "stats": [
-      { "label": "Stops", "value": "10" },
-      { "label": "Length", "value": "~1.5 km" },
-      { "label": "Time", "value": "60 min" }
+      {
+        "label": "Stops",
+        "value": "9"
+      },
+      {
+        "label": "Length",
+        "value": "~1.5 km"
+      },
+      {
+        "label": "Time",
+        "value": "60 min"
+      }
     ]
   },
   "stations": [
     {
-      "id": "uvod",
-      "order": 1,
-      "title": "Welcome to Peliny",
-      "subtitle": "Introduction to the trail",
-      "icon": "sign",
-      "image": null,
-      "audio": "assets/audio/demo.mp3",
-      "text": [
-        "The Peliny Nature Reserve lies on the right bank of the Tichá Orlice river, just a few minutes' walk from the main square of Choceň. Within its 3.31 hectares you will find a deep rocky gorge, a preserved flora and a slice of local history.",
-        "The reserve was declared in 1948 and is managed by the Town of Choceň. Its protected features include scree forests, chalk rock chimneys and cliff walls above the right bank of the river.",
-        "Ten stops of this trail will guide you from the history of Pel's Mill through the rock pillars up to Doskočil's Viewpoint. At each panel, please pause and listen to the short commentary."
-      ],
-      "childText": "Hi! Welcome to the Peliny Nature Trail. It's a rocky valley near Choceň where lots of interesting plants grow — and where tiny snails, birds and even four hundred kinds of mushrooms live. Together we'll visit ten stops. Put on some good shoes and let's go!",
-      "location": { "lat": 50.0004, "lng": 16.2160 },
-      "durationToNext": "5 min walk",
-      "next": "opukove-pilire"
-    },
-    {
       "id": "opukove-pilire",
-      "order": 2,
+      "order": 1,
       "title": "The Chalk Pillars",
       "subtitle": "The reserve's icon",
       "icon": "mountain",
@@ -45,13 +37,16 @@
         "The walls have weathered into remarkable shapes; one of them is nicknamed The Camel (see next stop). Many names were carved into the rock over the 19th and 20th centuries — please help preserve the cliff without adding new inscriptions."
       ],
       "childText": "Look up in front of you. These cliffs are as tall as a ten-storey building — a full thirty-five metres! Who built them? The river. Over millions of years it patiently cut its path through the soft rock called opuka — and that's how this huge valley was born. What a patient river, isn't it?",
-      "location": { "lat": 50.0008, "lng": 16.2172 },
+      "location": {
+        "lat": 50.0008,
+        "lng": 16.2172
+      },
       "durationToNext": "3 min walk",
       "next": "velbloud"
     },
     {
       "id": "velbloud",
-      "order": 3,
+      "order": 2,
       "title": "The Camel",
       "subtitle": "The most striking pillar",
       "icon": "camel",
@@ -63,13 +58,16 @@
         "The Camel is one of the most photographed motifs of Peliny. It looks best in the afternoon, when the sun lights it up from the west."
       ],
       "childText": "See that big rock? It has two humps on top — just like a real camel. That's why it has this name. And do you know why it didn't crumble like the rock around it? It has a hard hat on top that shields it from the rain. That stone hat will last for a very long time.",
-      "location": { "lat": 50.0010, "lng": 16.2178 },
+      "location": {
+        "lat": 50.001,
+        "lng": 16.2178
+      },
       "durationToNext": "4 min walk",
       "next": "pel-mlyn"
     },
     {
       "id": "pel-mlyn",
-      "order": 4,
+      "order": 3,
       "title": "Pel's Mill",
       "subtitle": "The origin of the name Peliny",
       "icon": "mill",
@@ -81,13 +79,16 @@
         "Today only stone foundations remain, overgrown among the trees. Standing here, you can imagine the bustle of a century ago — the creaking of the mill wheel and the smell of freshly ground flour."
       ],
       "childText": "Six hundred years ago a water mill stood right here. It belonged to a man named Pelín — and the whole reserve is named after him. The mill wheel creaked, the water splashed, and the miller ground flour. Today only a few stones in the grass remain of the mill.",
-      "location": { "lat": 50.0012, "lng": 16.2185 },
+      "location": {
+        "lat": 50.0012,
+        "lng": 16.2185
+      },
       "durationToNext": "4 min walk",
       "next": "ticha-orlice"
     },
     {
       "id": "ticha-orlice",
-      "order": 5,
+      "order": 4,
       "title": "The Tichá Orlice River",
       "subtitle": "The river that carved the valley",
       "icon": "water",
@@ -99,13 +100,16 @@
         "Over thousands of years this very river cut through the soft opuka and shaped a valley tens of metres deep. Without its patient work Peliny would look nothing like today."
       ],
       "childText": "This river is called the Tichá Orlice — which means the Quiet Eagle. It's called quiet because most of the year it flows very calmly. Big pike live in it, and in spring fish called barbels come here to have their fish babies. In summer you'll see canoes and kayaks on it.",
-      "location": { "lat": 50.0014, "lng": 16.2192 },
+      "location": {
+        "lat": 50.0014,
+        "lng": 16.2192
+      },
       "durationToNext": "5 min walk",
       "next": "kridove-more"
     },
     {
       "id": "kridove-more",
-      "order": 6,
+      "order": 5,
       "title": "Bed of the Cretaceous Sea",
       "subtitle": "Geology of opuka",
       "icon": "fossil",
@@ -117,13 +121,16 @@
         "Hidden in the rock, you may spot fossils from that ancient sea: fragments of crinoids, sea urchins, shells and foraminifera. Collecting is prohibited — please leave them in place for other visitors."
       ],
       "childText": "You won't believe this — the place where you're standing used to be the sea! But it was a very, very long time ago — ninety million years. Back then, instead of Bohemia there was water everywhere, and dinosaurs walked the land. On the sea floor, little shells and fish bones slowly turned into this grey rock. Look carefully and you might spot a small fossil.",
-      "location": { "lat": 50.0016, "lng": 16.2200 },
+      "location": {
+        "lat": 50.0016,
+        "lng": 16.22
+      },
       "durationToNext": "5 min walk",
       "next": "teplomilna-flora"
     },
     {
       "id": "teplomilna-flora",
-      "order": 7,
+      "order": 6,
       "title": "Warmth-loving Flora",
       "subtitle": "Bladdernut, bellflower and corydalis",
       "icon": "flower",
@@ -135,13 +142,16 @@
         "These thermophilic species survive here thanks to the south-facing cliffs, which accumulate sunlight. In summer the temperature by the rock wall can be up to five degrees higher than in the surrounding forest."
       ],
       "childText": "Look down at your feet. Rare little flowers grow here that you won't see anywhere else in the region. One is called bladdernut and has bubble-shaped fruits that people once strung into beads. And why do the plants love it here so much? Because the cliffs soak up the sun — it's warmer here than in the shady forest.",
-      "location": { "lat": 50.0020, "lng": 16.2207 },
+      "location": {
+        "lat": 50.002,
+        "lng": 16.2207
+      },
       "durationToNext": "4 min walk",
       "next": "svet-hub"
     },
     {
       "id": "svet-hub",
-      "order": 8,
+      "order": 7,
       "title": "A World of Fungi",
       "subtitle": "Hidden biodiversity",
       "icon": "mushroom",
@@ -153,13 +163,16 @@
         "Picking is forbidden inside the reserve. The fungi here play a vital role in breaking down organic matter and feeding the trees through an underground partnership known as mycorrhiza."
       ],
       "childText": "Here is something amazing about Peliny — four hundred kinds of mushrooms live here! There are boletes, birch boletes, chanterelles, but also very rare ones you won't meet in an ordinary forest. Mushrooms are friends of the trees — their underground threads bring the trees water and food. But here you don't pick them.",
-      "location": { "lat": 50.0023, "lng": 16.2214 },
+      "location": {
+        "lat": 50.0023,
+        "lng": 16.2214
+      },
       "durationToNext": "3 min walk",
       "next": "zrnovka"
     },
     {
       "id": "zrnovka",
-      "order": 9,
+      "order": 8,
       "title": "Hidden Dwellers",
       "subtitle": "The rare molluscs of Peliny",
       "icon": "snail",
@@ -171,13 +184,16 @@
         "After a rainy night the molluscs crawl out onto the surface and the rocks seem to come alive with them. During the day they hide in cracks. Please do not move the stones — underneath are their shelters."
       ],
       "childText": "A very rare little snail lives here — it's called the ribbed pillar snail. It's tiny, with neat little ribs on its shell. And it builds its shell from calcium that it finds right here in the rock. When can you see them best? After rain, they crawl out from the cracks and cover the whole cliff.",
-      "location": { "lat": 50.0025, "lng": 16.2220 },
+      "location": {
+        "lat": 50.0025,
+        "lng": 16.222
+      },
       "durationToNext": "6 min walk",
       "next": "doskocilova-vyhlidka"
     },
     {
       "id": "doskocilova-vyhlidka",
-      "order": 10,
+      "order": 9,
       "title": "Doskočil's Viewpoint",
       "subtitle": "A panorama at the finish",
       "icon": "vista",
@@ -189,16 +205,19 @@
         "Thank you for walking the trail all the way up. You can return to the centre of Choceň along the blue tourist trail by the river (about 15 minutes) or take the shorter serpentine path just below the viewpoint."
       ],
       "childText": "You did it, all the way to the top! Congratulations! From here you can see the whole town of Choceň and far into the countryside. When it's clear, you can even spot the Orlické Mountains on the horizon. This viewpoint is called Doskočilova, and it has just got new steps. Now sit on the bench and enjoy the view for a while.",
-      "location": { "lat": 50.0028, "lng": 16.2228 },
+      "location": {
+        "lat": 50.0028,
+        "lng": 16.2228
+      },
       "durationToNext": null,
       "next": null
     },
     {
       "id": "zapomenuty-pramen",
-      "order": 11,
+      "order": 10,
       "bonus": true,
       "title": "The Forgotten Spring",
-      "subtitle": "Hidden 11th stop",
+      "subtitle": "Secret bonus stop",
       "icon": "key",
       "image": null,
       "audio": "assets/audio/demo.mp3",
@@ -208,7 +227,10 @@
         "Today the spring is no longer officially maintained, but for those who walk the trail attentively, it remains a quiet coda to the Peliny story. Congratulations — you have just found your reward for patience."
       ],
       "childText": "You found a secret place! Below the cliffs, where the old mill used to stand, a tiny spring is still bubbling. Most people walk right past without noticing — but you are observer number one! The miller's family used it for drinking, for cooking, and even for the mill wheel. The spring is still flowing today, just a little hidden behind the moss.",
-      "location": { "lat": 50.0013, "lng": 16.2188 },
+      "location": {
+        "lat": 50.0013,
+        "lng": 16.2188
+      },
       "durationToNext": null,
       "next": null
     }

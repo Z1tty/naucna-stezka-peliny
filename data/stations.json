@@ -2,38 +2,21 @@
   "meta": {
     "title": "Naučná stezka Peliny",
     "subtitle": "Přírodní rezervace nad Tichou Orlicí",
-    "intro": "Deset zastavení vás provede skalnatou rezervací u Chocně — od historie Pelova mlýna přes monumentální opukové stěny až k Doskočilově vyhlídce nad městem.",
+    "intro": "Devět zastavení v rezervaci Peliny u Chocně — u každého panelu je QR kód. Naskenujte jej telefonem a otevře se stránka se zajímavostmi, fotografií a audio průvodcem pro děti. Stezkou projdete od monumentálních opukových stěn přes historii Pelova mlýna až k Doskočilově vyhlídce nad městem. Po naskenování všech zastavení se odemkne bonusové místo a certifikát o absolvování.",
     "heroImage": "assets/images/hero-peliny.jpg",
     "heroCredit": "Foto: Petr1888 / Wikimedia Commons, CC BY-SA 4.0",
     "heroCreditUrl": "https://commons.wikimedia.org/wiki/File:Pohled_na_Peliny_01.jpg",
+    "trailMapUrl": "https://mapy.com/s/banuvabeju",
     "stats": [
-      { "label": "Zastavení", "value": "10" },
+      { "label": "Zastavení", "value": "9" },
       { "label": "Délka", "value": "~1,5 km" },
       { "label": "Čas", "value": "60 min" }
     ]
   },
   "stations": [
     {
-      "id": "uvod",
-      "order": 1,
-      "title": "Vítejte na Pelinách",
-      "subtitle": "Úvod k naučné stezce",
-      "icon": "sign",
-      "image": null,
-      "audio": "assets/audio/demo.mp3",
-      "text": [
-        "Přírodní rezervace Peliny leží na pravém břehu Tiché Orlice několik minut chůze od choceňského náměstí. Na ploše 3,31 hektaru se setkává hluboké skalnaté údolí, zachovalá květena a kus místní historie.",
-        "Rezervace byla vyhlášena v roce 1948 a spravuje ji město Choceň. Chráněnými prvky jsou suťové lesy, opukové skalní komíny a stěny nad pravým břehem řeky.",
-        "Deset zastavení této stezky vás provede od historie Pelova mlýna přes skalní pilíře až k Doskočilově vyhlídce. U každého panelu se zastavte a poslechněte si krátké povídání."
-      ],
-      "childText": "Ahoj! Vítej na naučné stezce Peliny. Je to skalnaté údolí u Chocně, kde roste spousta zajímavých rostlin a žijí tady malí plži, ptáci a dokonce čtyři sta druhů hub. Projdeme dohromady deset zastavení. Připrav si pořádné boty a jdeme na to!",
-      "location": { "lat": 50.0004, "lng": 16.2160 },
-      "durationToNext": "5 min chůze",
-      "next": "opukove-pilire"
-    },
-    {
       "id": "opukove-pilire",
-      "order": 2,
+      "order": 1,
       "title": "Opukové pilíře",
       "subtitle": "Dominanta rezervace",
       "icon": "mountain",
@@ -51,7 +34,7 @@
     },
     {
       "id": "velbloud",
-      "order": 3,
+      "order": 2,
       "title": "Velbloud",
       "subtitle": "Nejvýraznější skalní pilíř",
       "icon": "camel",
@@ -69,7 +52,7 @@
     },
     {
       "id": "pel-mlyn",
-      "order": 4,
+      "order": 3,
       "title": "Pelův mlýn",
       "subtitle": "Původ jména Peliny",
       "icon": "mill",
@@ -87,7 +70,7 @@
     },
     {
       "id": "ticha-orlice",
-      "order": 5,
+      "order": 4,
       "title": "Tichá Orlice",
       "subtitle": "Řeka, která vytvarovala údolí",
       "icon": "water",
@@ -105,7 +88,7 @@
     },
     {
       "id": "kridove-more",
-      "order": 6,
+      "order": 5,
       "title": "Dno křídového moře",
       "subtitle": "Geologie opuky",
       "icon": "fossil",
@@ -123,7 +106,7 @@
     },
     {
       "id": "teplomilna-flora",
-      "order": 7,
+      "order": 6,
       "title": "Teplomilná flóra",
       "subtitle": "Klokoč, zvonek a dymnivka",
       "icon": "flower",
@@ -141,7 +124,7 @@
     },
     {
       "id": "svet-hub",
-      "order": 8,
+      "order": 7,
       "title": "Svět hub",
       "subtitle": "Skrytá biodiverzita",
       "icon": "mushroom",
@@ -159,7 +142,7 @@
     },
     {
       "id": "zrnovka",
-      "order": 9,
+      "order": 8,
       "title": "Skrytí obyvatelé",
       "subtitle": "Vzácní měkkýši",
       "icon": "snail",
@@ -177,7 +160,7 @@
     },
     {
       "id": "doskocilova-vyhlidka",
-      "order": 10,
+      "order": 9,
       "title": "Doskočilova vyhlídka",
       "subtitle": "Panorama na závěr",
       "icon": "vista",
@@ -195,10 +178,10 @@
     },
     {
       "id": "zapomenuty-pramen",
-      "order": 11,
+      "order": 10,
       "bonus": true,
       "title": "Zapomenutý pramen",
-      "subtitle": "Tajné 11. zastavení",
+      "subtitle": "Tajné bonusové zastavení",
       "icon": "key",
       "image": null,
       "audio": "assets/audio/demo.mp3",

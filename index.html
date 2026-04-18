@@ -33,6 +33,14 @@
 
     <ul class="stats" id="stats"></ul>
 
+    <a class="trail-map-cta" id="trailMapCta" href="#" target="_blank" rel="noopener" hidden>
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m9 20-6-3V4l6 3m0 13 6-3m-6 3V7m6 10 6 3V7l-6-3m0 13V4m0 0-6 3"/>
+      </svg>
+      <span id="trailMapCtaLabel">Otevřít celou trasu v Mapy.com</span>
+      <img class="trail-map-cta__logo" src="assets/images/mapy-com-logo.svg" alt="Mapy.com" height="16">
+    </a>
+
     <div class="progress-banner" id="progressBanner" hidden>
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
       <span><span id="visitedLabel">Navštíveno</span>: <span class="progress-banner__count" id="progressCount">0</span> <span id="progressOf">z</span> <span id="progressTotal">10</span></span>
@@ -142,6 +150,14 @@
       heroSubtitle.textContent = meta.subtitle || '';
       if (meta.heroImage) heroImage.src = meta.heroImage;
       else hero.style.display = 'none';
+
+      if (meta.trailMapUrl) {
+        const cta = document.getElementById('trailMapCta');
+        cta.href = meta.trailMapUrl;
+        document.getElementById('trailMapCtaLabel').textContent = App.t(lang, 'openTrailOnMap');
+        cta.hidden = false;
+      }
+
       if (meta.heroCredit) {
         heroCredit.innerHTML = meta.heroCreditUrl
           ? '<a href="' + App.escapeHtml(meta.heroCreditUrl) + '" target="_blank" rel="noopener">' + App.escapeHtml(meta.heroCredit) + '</a>'

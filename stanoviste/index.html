@@ -163,7 +163,24 @@
         ? '<figure class="station__media"><img src="../' + App.escapeHtml(s.image) + '" alt="' + App.escapeHtml(s.title) + '"></figure>'
         : '<figure class="station__media station__media--icon"><svg aria-hidden="true"><use href="#icon-' + App.escapeHtml(s.icon || 'sign') + '"/></svg></figure>';
 
-      const paragraphs = (s.text || []).map(txt => '<p>' + App.escapeHtml(txt) + '</p>').join('');
+      const inlineScanHtml =
+        '<div class="inline-scan">' +
+          '<button class="btn-inline-scan" type="button" id="inlineScanBtn">' +
+            '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' +
+              '<path d="M21 15v4a2 2 0 0 1-2 2h-4M17 3h4v4M3 17v2a2 2 0 0 0 2 2h4M7 3H5a2 2 0 0 0-2 2v2"/>' +
+              '<circle cx="12" cy="13" r="3.5"/>' +
+              '<path d="M8.5 10V8a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 8v2"/>' +
+            '</svg>' +
+            '<span>' + App.escapeHtml(App.t(lang, 'recordVisit')) + '</span>' +
+          '</button>' +
+        '</div>';
+
+      const paragraphs = (s.text || []).map((txt, i) => {
+        const p = '<p>' + App.escapeHtml(txt) + '</p>';
+        // Insert inline scan CTA after first paragraph (only for non-bonus)
+        if (i === 0 && !s.bonus) return p + inlineScanHtml;
+        return p;
+      }).join('');
 
       const audioBlock = s.audio ? (
         '<div class="audio" id="audio">' +
@@ -244,6 +261,9 @@
         '<div class="actions">' + backBtn + '</div>';
 
       if (s.audio) wireAudio(lang);
+
+      const inlineBtn = document.getElementById('inlineScanBtn');
+      if (inlineBtn) inlineBtn.addEventListener('click', () => App.openScanner(lang));
 
     } catch (e) {
       root.innerHTML = '<p class="error">' + App.escapeHtml(App.t(lang, 'loadErrorStation')) + '</p>';

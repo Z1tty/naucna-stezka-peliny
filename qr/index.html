@@ -47,7 +47,12 @@
           '<br><a href="../?lang=' + lang + '">' + App.escapeHtml(App.t(lang, 'backToOverview')) + '</a>';
         return;
       }
-      // Include via=qr so station page marks as visited
+      if (target === '__home__') {
+        // Start QR — just open the home page, don't record anything
+        location.replace('../?lang=' + lang);
+        return;
+      }
+      // Regular station — include via=qr so station page marks as visited
       location.replace('../stanoviste/?id=' + encodeURIComponent(target) + '&via=qr&lang=' + lang);
     } catch (e) {
       msg.className = 'error';

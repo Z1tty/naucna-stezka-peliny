@@ -97,7 +97,13 @@
       color: var(--muted);
       word-break: break-all;
       font-family: ui-monospace, menlo, monospace;
-      margin: 0 0 8px;
+      margin: 0 0 6px;
+    }
+    .card__note {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-style: italic;
+      margin: 4px 0 6px;
     }
     .card__link {
       font-size: 0.82rem;
@@ -160,7 +166,7 @@
 
   <script>
     const titles = {
-      1:  { id: 'uvod',                  cs: 'Vítejte na Pelinách' },
+      1:  { id: '__home__',              cs: 'Start stezky (úvod)',        note: 'Otevírá hlavní stránku, nezapočítává se do bonusu.' },
       2:  { id: 'opukove-pilire',        cs: 'Opukové pilíře' },
       3:  { id: 'velbloud',              cs: 'Velbloud' },
       4:  { id: 'pel-mlyn',              cs: 'Pelův mlýn' },
@@ -178,11 +184,14 @@
       const url = base + i;
       const card = document.createElement('div');
       card.className = 'card';
+      const label = (i === 1) ? 'QR Start' : `Zastavení ${i - 1}`;
+      const note = titles[i].note ? `<p class="card__note">${titles[i].note}</p>` : '';
       card.innerHTML = `
-        <span class="card__num">Zastavení ${i}</span>
+        <span class="card__num">${label}</span>
         <img src="png/peliny-${i}.png" alt="QR kód č. ${i}">
         <h3 class="card__title">${titles[i].cs}</h3>
         <p class="card__url">${url}</p>
+        ${note}
         <a class="card__link" href="${url}" target="_blank">Otevřít odkaz &rarr;</a>
       `;
       grid.appendChild(card);

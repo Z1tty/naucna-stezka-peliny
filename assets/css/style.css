@@ -1109,6 +1109,86 @@ main {
 
 .completion-card__reset:hover { color: var(--fg); }
 
+/* ------------------------------------------------------------------ INLINE SCAN CTA */
+
+.inline-scan {
+  margin: 18px 0 22px;
+  text-align: center;
+}
+
+.btn-inline-scan {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 0.96rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(29, 109, 62, 0.28);
+  transition: transform 0.12s ease, background 0.15s ease, box-shadow 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+  letter-spacing: -0.005em;
+}
+
+.btn-inline-scan:hover {
+  background: var(--accent-dim);
+  box-shadow: 0 6px 18px rgba(29, 109, 62, 0.35);
+}
+
+.btn-inline-scan:active {
+  transform: scale(0.97);
+}
+
+.btn-inline-scan svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* ------------------------------------------------------------------ HOME TRAIL MAP CTA */
+
+.trail-map-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 18px;
+  background: var(--bg-card);
+  color: var(--fg);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.96rem;
+  margin: 0 0 22px;
+}
+
+.trail-map-cta:hover { border-color: var(--muted); }
+
+.trail-map-cta svg {
+  width: 20px;
+  height: 20px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.trail-map-cta__logo {
+  height: 16px;
+  width: auto;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+@media (prefers-color-scheme: dark) {
+  .trail-map-cta__logo { filter: invert(1) hue-rotate(180deg); }
+}
+
 /* ------------------------------------------------------------------ REVISIT BANNER */
 
 .revisit-banner {
