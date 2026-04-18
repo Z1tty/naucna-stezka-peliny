@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Přesměrování…</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <main>
+    <p class="loading" id="msg">Přesměrovávám…</p>
+  </main>
+  <script>
+    (async function () {
+      const msg = document.getElementById('msg');
+      const code = new URLSearchParams(location.search).get('c');
+      if (!code) {
+        msg.textContent = 'Chybí kód QR.';
+        msg.className = 'error';
+        return;
+      }
+      try {
+        const res = await fetch('../data/redirects.json', { cache: 'no-cache' });
+        const { redirects } = await res.json();
+        const target = redirects[code];
+        if (!target) {
+          msg.innerHTML = 'QR kód <b>' + code + '</b> není v systému.<br><a href="../">Zpět na seznam</a>';
+          msg.className = 'error';
+          return;
+        }
+        location.replace('../stanoviste/?id=' + encodeURIComponent(target));
+      } catch (e) {
+        msg.textContent = 'Chyba při přesměrování.';
+        msg.className = 'error';
+      }
+    })();
+  </script>
+</body>
+</html>

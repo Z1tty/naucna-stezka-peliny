@@ -1,0 +1,43 @@
+{
+  "stations": [
+    {
+      "id": "opukove-pilire",
+      "order": 1,
+      "title": "Opukové pilíře",
+      "image": "assets/images/opukove-pilire.jpg",
+      "audio": "",
+      "text": [
+        "Dominantou rezervace jsou monumentální opukové pilíře, které se tyčí až do výšky 35 metrů. Tyto strmé skalní stěny vznikaly miliony let díky trpělivé erozní činnosti řek.",
+        "Opuka je měkká vápnitá hornina, která se snadno rozpadá. Proto má stěna charakteristický profil s převisy, žlaby a voštinami."
+      ],
+      "location": { "lat": 50.0007, "lng": 16.2175 },
+      "next": "lesni-zivot"
+    },
+    {
+      "id": "lesni-zivot",
+      "order": 2,
+      "title": "Údolí Tiché Orlice",
+      "image": "assets/images/peliny-udoli.jpg",
+      "audio": "",
+      "text": [
+        "Údolí Tiché Orlice tvoří ostrý předěl mezi rezervací a okolní krajinou. Řeka po miliony let postupně prořízla měkkou opukou a odkryla skalní podloží.",
+        "Smíšený les na svazích je domovem datla černého, strakapouda i sovy pálené. Listnaté stromy poskytují v korunách dutiny pro hnízdění."
+      ],
+      "location": { "lat": 50.0010, "lng": 16.2180 },
+      "next": "reka-tiha"
+    },
+    {
+      "id": "reka-tiha",
+      "order": 3,
+      "title": "Řeka Tichá Orlice",
+      "image": "assets/images/reka.jpg",
+      "audio": "",
+      "text": [
+        "Řeka Tichá Orlice vytvarovala zdejší údolí. Její erozní činnost za tisíce let odkryla opukové podloží.",
+        "V tůních žije pstruh potoční, vranka obecná a mnoho druhů vodního hmyzu."
+      ],
+      "location": { "lat": 50.0015, "lng": 16.2185 },
+      "next": null
+    }
+  ]
+}

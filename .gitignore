@@ -1,0 +1,9 @@
+.DS_Store
+*.log
+node_modules/
+.vscode/
+.idea/
+.claude/
+
+# Originální AI-generované obrázky (použity v assets/images/)
+Proc jsou Peliny vyjimecn é*/

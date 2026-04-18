@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2e5d3a">
+  <title>Stanoviště – Naučná stezka Peliny</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site">
+    <h1><a href="../" style="color:#fff;text-decoration:none;">Naučná stezka Peliny</a></h1>
+  </header>
+  <main id="station">
+    <p class="loading">Načítám…</p>
+  </main>
+  <footer class="site">© Naučná stezka Peliny</footer>
+
+  <script>
+    (async function () {
+      const root = document.getElementById('station');
+      const id = new URLSearchParams(location.search).get('id');
+      if (!id) {
+        root.innerHTML = '<p class="error">Chybí parametr stanoviště.</p>';
+        return;
+      }
+      try {
+        const res = await fetch('../data/stations.json', { cache: 'no-cache' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const { stations } = await res.json();
+        const s = stations.find(x => x.id === id);
+        if (!s) {
+          root.innerHTML = '<p class="error">Stanoviště nenalezeno.</p>';
+          return;
+        }
+        document.title = s.title + ' – Naučná stezka Peliny';
+
+        const paragraphs = (s.text || []).map(t => `<p>${escapeHtml(t)}</p>`).join('');
+        const audio = s.audio
+          ? `<div class="audio-wrap"><audio controls preload="none" src="../${escapeAttr(s.audio)}"></audio></div>`
+          : '';
+        const next = s.next
+          ? `<a class="btn" href="?id=${encodeURIComponent(s.next)}">Další stanoviště →</a>`
+          : `<a class="btn" href="../">Zpět na seznam</a>`;
+        const map = s.location
+          ? `<a class="btn secondary" target="_blank" rel="noopener"
+                href="https://mapy.cz/zakladni?source=coor&id=${s.location.lng},${s.location.lat}&x=${s.location.lng}&y=${s.location.lat}&z=17">
+               Zobrazit na Mapy.cz
+             </a>`
+          : '';
+
+        root.innerHTML = `
+          <h2 class="station-title">${escapeHtml(s.title)}</h2>
+          <img class="station-image" src="../${escapeAttr(s.image)}" alt="${escapeAttr(s.title)}"
+               onerror="this.style.background='#ddd';this.removeAttribute('src');">
+          <div class="station-text">${paragraphs}</div>
+          ${audio}
+          <div class="actions">${next}${map}</div>
+        `;
+      } catch (e) {
+        root.innerHTML = '<p class="error">Nepodařilo se načíst stanoviště.</p>';
+        console.error(e);
+      }
+
+      function escapeHtml(s) {
+        return String(s).replace(/[&<>"']/g, c => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        }[c]));
+      }
+      function escapeAttr(s) { return escapeHtml(s); }
+    })();
+  </script>
+</body>
+</html>

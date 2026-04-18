@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2e5d3a">
+  <title>Naučná stezka Peliny</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="site">
+    <h1>Naučná stezka Peliny</h1>
+  </header>
+  <main>
+    <p class="intro">Přírodní rezervace u Chocně. Vyberte stanoviště nebo naskenujte QR kód přímo v terénu.</p>
+    <ul id="stations" class="station-list">
+      <li class="loading">Načítám…</li>
+    </ul>
+  </main>
+  <footer class="site">© Naučná stezka Peliny</footer>
+
+  <script>
+    (async function () {
+      const list = document.getElementById('stations');
+      try {
+        const res = await fetch('data/stations.json', { cache: 'no-cache' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const { stations } = await res.json();
+        list.innerHTML = '';
+        stations.sort((a, b) => a.order - b.order).forEach(s => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a href="stanoviste/?id=${encodeURIComponent(s.id)}">
+            <span class="num">${s.order}</span>
+            <span>${s.title}</span>
+          </a>`;
+          list.appendChild(li);
+        });
+      } catch (e) {
+        list.innerHTML = '<li class="error">Nepodařilo se načíst seznam stanovišť.</li>';
+        console.error(e);
+      }
+    })();
+  </script>
+</body>
+</html>
