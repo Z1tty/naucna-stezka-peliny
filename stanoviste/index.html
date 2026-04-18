@@ -223,16 +223,6 @@
           '</aside>';
       }
 
-      // Map link (current place)
-      const mapBtn = s.location
-        ? '<a class="btn btn--mapy" target="_blank" rel="noopener"' +
-            ' href="' + App.buildMapyPointUrl(s.location) + '">' +
-            '<svg aria-hidden="true"><use href="#icon-pin"/></svg>' +
-            '<span>' + App.escapeHtml(App.t(lang, 'showOnMap')) + '</span>' +
-            '<img class="btn__mapy-logo" src="../assets/images/mapy-com-logo.svg" alt="Mapy.com" height="16">' +
-          '</a>'
-        : '';
-
       const backBtn = '<a class="btn btn--secondary" href="../' + langQSp + '">' +
         '<span>' + App.escapeHtml(App.t(lang, 'backToOverview')) + '</span></a>';
 
@@ -251,7 +241,7 @@
         audioBlock +
         qrNote +
         nextGuidance +
-        '<div class="actions">' + mapBtn + backBtn + '</div>';
+        '<div class="actions">' + backBtn + '</div>';
 
       if (s.audio) wireAudio(lang);
 
