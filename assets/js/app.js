@@ -76,6 +76,20 @@
       trailFinishedBackHint: 'Nebo se můžete vrátit zpět na začátek:',
       trailFinishedBonusCta: 'Otevřít bonusové zastavení',
       navigateToStart: 'Navigovat na začátek',
+      installTitle: 'Stáhnout jako aplikaci',
+      installHint: 'Přidá ikonu na plochu, funguje i bez signálu.',
+      installAndroidLabel: 'Android',
+      installAppleLabel: 'iPhone',
+      iosInstallTitle: 'Instalace na iPhone',
+      iosInstallStep1: '1. Klepněte na tlačítko <b>Sdílet</b> ve spodní liště Safari.',
+      iosInstallStep2: '2. V nabídce vyberte <b>„Přidat na plochu"</b>.',
+      iosInstallStep3: '3. Potvrďte klepnutím na <b>„Přidat"</b> vpravo nahoře.',
+      iosInstallSafariHint: 'Funguje pouze v Safari — v jiných prohlížečích tato volba není dostupná.',
+      androidInstallTitle: 'Instalace na Android',
+      androidInstallStep1: '1. V Chromu klepněte na ikonu <b>⋮</b> vpravo nahoře.',
+      androidInstallStep2: '2. Vyberte <b>„Nainstalovat aplikaci"</b> nebo <b>„Přidat na plochu"</b>.',
+      androidInstallStep3: '3. Potvrďte <b>„Instalovat"</b>.',
+      installModalClose: 'Rozumím',
       scanQrBtn: 'Naskenovat QR',
       scanQrTitle: 'Naskenujte QR kód',
       scanQrHint: 'Nasměrujte kameru na QR kód u panelu.',
@@ -161,6 +175,20 @@
       trailFinishedBackHint: 'Or head back to the start:',
       trailFinishedBonusCta: 'Open the bonus stop',
       navigateToStart: 'Route to the start',
+      installTitle: 'Install as an app',
+      installHint: 'Adds an icon to your home screen — works offline.',
+      installAndroidLabel: 'Android',
+      installAppleLabel: 'iPhone',
+      iosInstallTitle: 'Install on iPhone',
+      iosInstallStep1: '1. Tap the <b>Share</b> button in Safari\u2019s bottom bar.',
+      iosInstallStep2: '2. Choose <b>"Add to Home Screen"</b>.',
+      iosInstallStep3: '3. Confirm by tapping <b>"Add"</b> in the top-right corner.',
+      iosInstallSafariHint: 'Only works in Safari — other browsers do not offer this option.',
+      androidInstallTitle: 'Install on Android',
+      androidInstallStep1: '1. In Chrome, tap the <b>⋮</b> icon in the top-right corner.',
+      androidInstallStep2: '2. Choose <b>"Install app"</b> or <b>"Add to Home screen"</b>.',
+      androidInstallStep3: '3. Confirm <b>"Install"</b>.',
+      installModalClose: 'Got it',
       scanQrBtn: 'Scan QR',
       scanQrTitle: 'Scan a QR code',
       scanQrHint: 'Point the camera at the QR code on the panel.',
@@ -299,7 +327,29 @@
   function renderFooter(el, lang) {
     const year = new Date().getFullYear();
     el.className = 'site-footer';
+    const installHtml = isStandalone() ? '' : (
+      '<div class="site-footer__install">' +
+        '<div class="site-footer__install-label">' + escapeHtml(t(lang, 'installTitle')) + '</div>' +
+        '<div class="site-footer__install-icons">' +
+          '<button type="button" class="site-footer__install-btn" data-install="android" aria-label="' + escapeHtml(t(lang, 'installAndroidLabel')) + '">' +
+            '<svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">' +
+              '<path d="M17.5 13.5c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5zm-11 0c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5zM16.8 7.1l1.6-2.8c.1-.2 0-.4-.1-.5s-.4 0-.5.1l-1.6 2.8c-1.3-.6-2.7-.9-4.2-.9s-2.9.3-4.2.9L6.2 3.9c-.1-.2-.3-.2-.5-.1-.2.1-.2.3-.1.5l1.6 2.8c-2.6 1.5-4.2 4-4.2 6.9h18c0-2.9-1.7-5.4-4.2-6.9z"/>' +
+              '<path d="M3 15v6c0 .6.4 1 1 1h1v-7H3zm16 0v7h1c.6 0 1-.4 1-1v-6h-2zM6 22h12v-7H6v7z"/>' +
+            '</svg>' +
+            '<span>' + escapeHtml(t(lang, 'installAndroidLabel')) + '</span>' +
+          '</button>' +
+          '<button type="button" class="site-footer__install-btn" data-install="ios" aria-label="' + escapeHtml(t(lang, 'installAppleLabel')) + '">' +
+            '<svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">' +
+              '<path d="M17.5 13.1c0-2.8 2.3-4.1 2.4-4.2-1.3-1.9-3.3-2.1-4-2.1-1.7-.2-3.3.9-4.1.9-.8 0-2.2-.9-3.6-.9-1.8 0-3.6 1-4.6 2.7-2 3.4-.5 8.4 1.4 11.2 1 1.3 2 2.8 3.5 2.8 1.4-.1 2-.9 3.7-.9s2.3.9 3.7.9c1.6 0 2.6-1.4 3.5-2.7.7-1 1.3-2.2 1.4-2.9 0 0-2.7-1.1-2.7-4.1zM14.9 5.6c.7-.9 1.2-2.1 1.1-3.3-1.1.1-2.3.7-3.1 1.6-.6.8-1.2 2-1 3.2 1.2.1 2.4-.6 3-1.5z"/>' +
+            '</svg>' +
+            '<span>' + escapeHtml(t(lang, 'installAppleLabel')) + '</span>' +
+          '</button>' +
+        '</div>' +
+        '<div class="site-footer__install-hint">' + escapeHtml(t(lang, 'installHint')) + '</div>' +
+      '</div>'
+    );
     el.innerHTML =
+      installHtml +
       '<p class="site-footer__partners">' +
         '<a href="https://www.zschocen.cz/" target="_blank" rel="noopener">Základní škola Sv. Čecha, Choceň</a>' +
         '<span class="site-footer__sep" aria-hidden="true">·</span>' +
@@ -309,6 +359,13 @@
       '<p class="site-footer__row">' + escapeHtml(t(lang, 'footerApp')) +
       ' \u00a9 ' + year +
       ' <a href="https://www.smartghost.cz" target="_blank" rel="noopener">SmartGhost</a></p>';
+
+    el.querySelectorAll('[data-install]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const platform = btn.getAttribute('data-install');
+        triggerInstall(lang, platform);
+      });
+    });
   }
 
   function showToast(text, kind) {
@@ -522,6 +579,83 @@
     update();
   }
 
+  /* ------------------------- PWA (install + service worker) ------------------------- */
+
+  let deferredInstallPrompt = null;
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredInstallPrompt = e;
+  });
+
+  function isStandalone() {
+    try {
+      if (window.matchMedia('(display-mode: standalone)').matches) return true;
+      if (window.navigator.standalone === true) return true;
+    } catch (e) {}
+    return false;
+  }
+
+  function isIOS() {
+    return /iphone|ipad|ipod/i.test(navigator.userAgent || '') && !window.MSStream;
+  }
+
+  async function triggerInstall(lang, platform) {
+    if (platform === 'android' && deferredInstallPrompt) {
+      try {
+        deferredInstallPrompt.prompt();
+        await deferredInstallPrompt.userChoice;
+      } catch (e) { /* ignore */ }
+      deferredInstallPrompt = null;
+      return;
+    }
+    showInstallInstructions(lang, platform);
+  }
+
+  function showInstallInstructions(lang, platform) {
+    const titleKey = platform === 'ios' ? 'iosInstallTitle' : 'androidInstallTitle';
+    const steps = platform === 'ios'
+      ? ['iosInstallStep1', 'iosInstallStep2', 'iosInstallStep3']
+      : ['androidInstallStep1', 'androidInstallStep2', 'androidInstallStep3'];
+    const hint = platform === 'ios' ? t(lang, 'iosInstallSafariHint') : '';
+
+    const overlay = document.createElement('div');
+    overlay.className = 'install-modal';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.innerHTML =
+      '<div class="install-modal__inner">' +
+        '<h2 class="install-modal__title">' + escapeHtml(t(lang, titleKey)) + '</h2>' +
+        '<ol class="install-modal__steps">' +
+          steps.map(k => '<li>' + t(lang, k) + '</li>').join('') +
+        '</ol>' +
+        (hint ? '<p class="install-modal__hint">' + escapeHtml(hint) + '</p>' : '') +
+        '<button type="button" class="install-modal__close">' + escapeHtml(t(lang, 'installModalClose')) + '</button>' +
+      '</div>';
+    document.body.appendChild(overlay);
+    document.body.style.overflow = 'hidden';
+
+    const close = () => {
+      overlay.remove();
+      document.body.style.overflow = '';
+    };
+    overlay.querySelector('.install-modal__close').addEventListener('click', close);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+  }
+
+  function registerServiceWorker() {
+    if (!('serviceWorker' in navigator)) return;
+    if (!/^https?:$/.test(location.protocol)) return;
+    window.addEventListener('load', () => {
+      const base = siteBaseUrl();
+      const swUrl = new URL('sw.js', base).toString();
+      navigator.serviceWorker.register(swUrl, { scope: base.pathname }).catch((e) => {
+        console.warn('SW register failed:', e);
+      });
+    });
+  }
+  registerServiceWorker();
+
   global.PelinyApp = {
     detectLang, setLang, t, I18N,
     dataFileUrl, getVisited, markVisited, clearVisited,
@@ -530,6 +664,7 @@
     buildMapyRouteUrl, buildMapyPointUrl,
     escapeHtml, renderLangSwitch, renderFooter, showToast,
     openScanner, tryResolveScan,
-    openLightbox
+    openLightbox,
+    isStandalone, isIOS, triggerInstall
   };
 })(window);
