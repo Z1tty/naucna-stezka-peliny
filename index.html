@@ -20,6 +20,7 @@
     <img class="hero__image" id="heroImage" alt="" aria-hidden="true">
     <div class="hero__overlay"></div>
     <nav class="lang-switch lang-switch--hero" id="langSwitch"></nav>
+    <div class="hero__credit" id="heroCredit"></div>
     <div class="hero__content">
       <span class="hero__eyebrow" id="heroEyebrow">Naučná stezka</span>
       <h1 class="hero__title" id="heroTitle">…</h1>
@@ -35,7 +36,6 @@
     <div class="progress-banner" id="progressBanner" hidden>
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
       <span><span id="visitedLabel">Navštíveno</span>: <span class="progress-banner__count" id="progressCount">0</span> <span id="progressOf">z</span> <span id="progressTotal">10</span></span>
-      <button class="progress-banner__reset" id="progressReset" type="button">Vynulovat</button>
     </div>
 
     <section id="completionSection" hidden></section>
@@ -92,7 +92,6 @@
     document.getElementById('sectionHeading').textContent = App.t(lang, 'stationsHeading');
     document.getElementById('visitedLabel').textContent = App.t(lang, 'visitedLabel');
     document.getElementById('progressOf').textContent = App.t(lang, 'of');
-    document.getElementById('progressReset').textContent = App.t(lang, 'resetBtn');
     document.getElementById('bonusSectionHeading').textContent = App.t(lang, 'bonusSectionHeading');
 
     const list = document.getElementById('stations');
@@ -109,7 +108,7 @@
     const banner = document.getElementById('progressBanner');
     const bannerCount = document.getElementById('progressCount');
     const bannerTotal = document.getElementById('progressTotal');
-    const reset = document.getElementById('progressReset');
+    const heroCredit = document.getElementById('heroCredit');
 
     try {
       const res = await fetch(App.dataFileUrl(lang), { cache: 'no-cache' });
@@ -126,6 +125,11 @@
       heroSubtitle.textContent = meta.subtitle || '';
       if (meta.heroImage) heroImage.src = meta.heroImage;
       else hero.style.display = 'none';
+      if (meta.heroCredit) {
+        heroCredit.innerHTML = meta.heroCreditUrl
+          ? '<a href="' + App.escapeHtml(meta.heroCreditUrl) + '" target="_blank" rel="noopener">' + App.escapeHtml(meta.heroCredit) + '</a>'
+          : App.escapeHtml(meta.heroCredit);
+      }
       intro.textContent = meta.intro || '';
 
       stats.innerHTML = '';
@@ -164,7 +168,21 @@
                 '<span>' + App.escapeHtml(App.t(lang, 'bonusCta')) + '</span>' +
               '</a>' : '') +
             '</div>' +
+            '<button class="completion-card__reset" id="startOverBtn" type="button">' +
+              App.escapeHtml(App.t(lang, 'startOver')) +
+            '</button>' +
           '</div>';
+
+        const startOverBtn = document.getElementById('startOverBtn');
+        if (startOverBtn) {
+          startOverBtn.title = App.t(lang, 'startOverHint');
+          startOverBtn.addEventListener('click', () => {
+            if (confirm(App.t(lang, 'startOverConfirm'))) {
+              App.clearVisited();
+              location.reload();
+            }
+          });
+        }
       }
 
       // Main list
@@ -178,12 +196,6 @@
         bonus.forEach(s => bonusList.appendChild(renderCard(s, visited.has(s.id), true, !allDone)));
       }
 
-      reset.addEventListener('click', () => {
-        if (confirm(App.t(lang, 'resetConfirm'))) {
-          App.clearVisited();
-          location.reload();
-        }
-      });
     } catch (e) {
       list.innerHTML = '<li class="error">' + App.escapeHtml(App.t(lang, 'loadError')) + '</li>';
       console.error(e);

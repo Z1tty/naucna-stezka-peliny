@@ -3,7 +3,9 @@
     "title": "Peliny Nature Trail",
     "subtitle": "A nature reserve above the Tichá Orlice river",
     "intro": "Ten stops lead through a rocky reserve near the town of Choceň — from the history of Pel's Mill through the monumental chalk cliffs all the way to Doskočil's Viewpoint above the town.",
-    "heroImage": "assets/images/opukove-pilire.jpg",
+    "heroImage": "assets/images/hero-peliny.jpg",
+    "heroCredit": "Photo: Petr1888 / Wikimedia Commons, CC BY-SA 4.0",
+    "heroCreditUrl": "https://commons.wikimedia.org/wiki/File:Pohled_na_Peliny_01.jpg",
     "stats": [
       { "label": "Stops", "value": "10" },
       { "label": "Length", "value": "~1.5 km" },

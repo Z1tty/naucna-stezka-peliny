@@ -3,7 +3,9 @@
     "title": "Naučná stezka Peliny",
     "subtitle": "Přírodní rezervace nad Tichou Orlicí",
     "intro": "Deset zastavení vás provede skalnatou rezervací u Chocně — od historie Pelova mlýna přes monumentální opukové stěny až k Doskočilově vyhlídce nad městem.",
-    "heroImage": "assets/images/opukove-pilire.jpg",
+    "heroImage": "assets/images/hero-peliny.jpg",
+    "heroCredit": "Foto: Petr1888 / Wikimedia Commons, CC BY-SA 4.0",
+    "heroCreditUrl": "https://commons.wikimedia.org/wiki/File:Pohled_na_Peliny_01.jpg",
     "stats": [
       { "label": "Zastavení", "value": "10" },
       { "label": "Délka", "value": "~1,5 km" },
