@@ -157,9 +157,15 @@ QR #1 otevírá domovskou stránku (nezapočítává se do postupu). QR #2–#10
 
 Proprietární — **„All Rights Reserved"**. Viz soubor [LICENSE](LICENSE).
 
-- Kód, texty, fotografie, audio, grafika a design jsou autorským dílem SmartGhost + ZŠ Sv. Čecha Choceň.
-- Kopírování, distribuce, odvozená díla nebo komerční použití jsou **zakázány** bez předchozího písemného souhlasu.
-- Povoleno je prohlížet aplikaci v prohlížeči, sdílet odkaz a citovat krátké úryvky s atribucí.
+Aplikace je vytvářena **pro bono** (bezúplatně) pro město Choceň a ZŠ Sv. Čecha Choceň, s cílem volně zpřístupnit naučnou stezku návštěvníkům rezervace Peliny. Návštěvníci smí aplikaci **bez omezení používat** — procházet stezku, skenovat QR kódy, stahovat certifikát, instalovat si PWA, sdílet odkaz.
+
+**Nepovoleno** bez písemného souhlasu autorů:
+- kopírování zdrojového kódu nebo obsahu a jeho publikace jinde,
+- distribuce nebo hosting mimo oficiální URL,
+- vytváření odvozených děl (fork, adaptace, překlad),
+- jakékoli komerční využití kódu, textů, fotografií nebo audio nahrávek.
+
+Texty, fotografie a audio nahrávky jsou dílem **SmartGhost + žáků a pedagogů ZŠ Sv. Čecha Choceň**. Audio průvodce bude namluven dětmi z této školy — finální nahrávky budou mít stejný licenční režim jako zbytek aplikace.
 
 Aplikace obsahuje několik komponent třetích stran pod vlastními licencemi — viz [NOTICES.md](NOTICES.md).
 

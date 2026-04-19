@@ -61,5 +61,5 @@ Several outline pictograms in the app are inspired by the open-source [Lucide](h
 
 ## Generated content
 
-- Station demo audio (`assets/audio/demo.mp3`) is synthesised with Apple's built-in macOS `say` command using the voice "Zuzana". It is a placeholder and will be replaced with original recordings provided by ZŠ Sv. Čecha Choceň.
+- Station demo audio (`assets/audio/demo.mp3`) is synthesised with Apple's built-in macOS `say` command using the voice "Zuzana". It is a placeholder and will be replaced with original recordings **voiced by pupils of ZŠ Sv. Čecha Choceň**. Those recordings will be covered by the project license.
 - App icons (`assets/icons/*.png`) are generated programmatically (Pillow) from a simple serif "P" on the project's accent color. They are original work covered by the project license.
