@@ -153,6 +153,16 @@ QR #1 otevírá domovskou stránku (nezapočítává se do postupu). QR #2–#10
 
 ---
 
+## Licence
+
+Proprietární — **„All Rights Reserved"**. Viz soubor [LICENSE](LICENSE).
+
+- Kód, texty, fotografie, audio, grafika a design jsou autorským dílem SmartGhost + ZŠ Sv. Čecha Choceň.
+- Kopírování, distribuce, odvozená díla nebo komerční použití jsou **zakázány** bez předchozího písemného souhlasu.
+- Povoleno je prohlížet aplikaci v prohlížeči, sdílet odkaz a citovat krátké úryvky s atribucí.
+
+Aplikace obsahuje několik komponent třetích stran pod vlastními licencemi — viz [NOTICES.md](NOTICES.md).
+
 ## Autor
 
 Aplikace © [SmartGhost](https://www.smartghost.cz)
