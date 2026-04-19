@@ -139,6 +139,8 @@ QR #1 otevírá domovskou stránku (nezapočítává se do postupu). QR #2–#10
 - **Fotky** — piktogramy v menu, hero je reálný, zbytek jsou placeholdery
 - **Skutečné GPS** panelů v terénu (pro navigaci)
 - **Odkaz na Mapy.com stezku** — zatím placeholder `mapy.com/s/banuvabeju`
+- **Analytika (GoatCounter)** — až bude registrovaný účet, přidat 1 řádek JS + custom eventy:
+  `qr_scan`, `station_view`, `bonus_unlock`, `certificate_view`, `pwa_install`, `audio_play`, `mapy_nav_click`
 
 ---
 
