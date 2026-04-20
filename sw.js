@@ -5,7 +5,7 @@
    - images/audio/css/js:    cache-first
    Versioned cache bucket — bump VERSION to force clients to rebuild on next open.
 */
-const VERSION = 'v4';
+const VERSION = 'v5';
 const PRECACHE = 'peliny-precache-' + VERSION;
 const RUNTIME  = 'peliny-runtime-'  + VERSION;
 
@@ -19,6 +19,8 @@ const PRECACHE_URLS = [
   './certifikat/',
   './certifikat/index.html',
   './manifest.json',
+  './favicon.svg',
+  './favicon.ico',
   './assets/css/style.css',
   './assets/js/app.js',
   './assets/audio/demo.mp3',
