@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Redirect GitHub Pages to production
 
 on:
   push:
@@ -21,10 +21,47 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Build redirect site
+        run: |
+          mkdir -p _site
+          cat > _site/index.html <<'EOF'
+          <!DOCTYPE html>
+          <html lang="cs">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Naučná stezka Peliny — přesunuto</title>
+            <meta http-equiv="refresh" content="0; url=https://stezka-peliny.smartghost.cz/">
+            <script>
+              (function () {
+                // Strip the GH Pages project prefix and forward the remaining path + query + hash
+                var prefix = '/naucna-stezka-peliny';
+                var path = location.pathname;
+                if (path.indexOf(prefix) === 0) path = path.substring(prefix.length) || '/';
+                location.replace('https://stezka-peliny.smartghost.cz' + path + location.search + location.hash);
+              })();
+            </script>
+            <style>
+              body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+                     padding: 3rem 1.5rem; max-width: 600px; margin: 0 auto;
+                     color: #222; line-height: 1.5; }
+              h1 { font-size: 1.4rem; margin: 0 0 1rem; }
+              a { color: #1d6d3e; font-weight: 600; }
+            </style>
+          </head>
+          <body>
+            <h1>Naučná stezka Peliny se přesunula</h1>
+            <p>Pokud nejste přesměrováni automaticky, pokračujte zde:</p>
+            <p><a href="https://stezka-peliny.smartghost.cz/">https://stezka-peliny.smartghost.cz/</a></p>
+          </body>
+          </html>
+          EOF
+          # 404.html catches every sub-path (QR redirects, stanoviste/, certifikat/...)
+          # so that old URLs preserve their path and query.
+          cp _site/index.html _site/404.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
       - id: deployment
         uses: actions/deploy-pages@v4
